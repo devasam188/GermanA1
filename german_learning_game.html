@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch Lernen!</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--der:#FF6B9D;--die:#A855F7;--das:#22D3EE;--gold:#FFD700;--green:#22C55E;--red:#EF4444;--bg:#FFF8F0;--shadow:0 8px 32px rgba(0,0,0,0.10);--radius:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;background-image:radial-gradient(circle at 10% 20%,#FFE4EF 0%,transparent 40%),radial-gradient(circle at 90% 80%,#E0F9FF 0%,transparent 40%),radial-gradient(circle at 50% 50%,#F3E8FF 0%,transparent 60%)}
+.header{text-align:center;padding:28px 20px 12px}
+.header h1{font-family:'Baloo 2',cursive;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;background:linear-gradient(135deg,var(--der) 0%,var(--die) 50%,var(--das) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
+.header p{font-size:1rem;color:#6B7280;margin-top:4px;font-weight:600}
+.stars{font-size:1.4rem;margin-bottom:2px;animation:bounce 1.5s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.legend{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 20px 16px}
+.legend-pill{padding:7px 18px;border-radius:50px;font-weight:800;font-size:.9rem;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s,box-shadow .15s;border:none}
+.legend-pill:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.pill-der{background:var(--der);color:white}.pill-die{background:var(--die);color:white}.pill-das{background:var(--das);color:#1e3a4f}.pill-all{background:#334155;color:white}
+.tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 20px 16px}
+.tab{padding:9px 20px;border-radius:50px;border:none;font-family:'Nunito',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;background:white;color:#374151;box-shadow:var(--shadow);transition:all .2s}
+.tab.active,.tab:hover{background:linear-gradient(135deg,var(--der),var(--die));color:white;transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,85,247,.35)}
+.search-bar{display:flex;justify-content:center;padding:0 20px 16px}
+.search-bar input{width:100%;max-width:460px;padding:12px 20px;border-radius:50px;border:3px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:600;outline:none;transition:border .2s;box-shadow:var(--shadow)}
+.search-bar input:focus{border-color:var(--die)}
+.section-header{text-align:center;padding:6px 20px 16px}
+.section-header h2{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;color:#374151}
+.count-badge{display:inline-block;background:#F3F4F6;color:#6B7280;padding:3px 12px;border-radius:20px;font-size:.8rem;font-weight:700;margin-left:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;padding:0 20px 40px;max-width:1400px;margin:0 auto}
+.card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;border:3px solid transparent;animation:fadeIn .4s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+.card:hover{transform:translateY(-5px) scale(1.03);box-shadow:0 16px 40px rgba(0,0,0,.15)}
+.card.der{border-color:var(--der)}.card.die{border-color:var(--die)}.card.das{border-color:var(--das)}
+.card-top{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card.der .card-top{background:linear-gradient(135deg,#FFE4EF,#FFB3CF)}.card.die .card-top{background:linear-gradient(135deg,#F3E8FF,#DDD6FE)}.card.das .card-top{background:linear-gradient(135deg,#E0F9FF,#BAE6FD)}.card.other .card-top{background:linear-gradient(135deg,#F0FDF4,#BBF7D0)}
+.card-img{width:80px;height:80px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15));transition:transform .3s}
+.card:hover .card-img{transform:scale(1.15) rotate(-4deg)}
+.article-badge{position:absolute;top:7px;left:7px;padding:2px 9px;border-radius:20px;font-weight:900;font-size:.7rem;letter-spacing:.5px;color:white;text-transform:uppercase}
+.card.der .article-badge{background:var(--der)}.card.die .article-badge{background:var(--die)}.card.das .article-badge{background:#0891B2}.card.other .article-badge{background:#16A34A;font-size:.62rem}
+.card-body{padding:10px 12px 12px}
+.german-word{font-family:'Baloo 2',cursive;font-weight:800;font-size:1rem;color:#1F2937;line-height:1.2}
+.english-word{font-size:.78rem;color:#6B7280;font-weight:600;margin-top:2px}
+.plural-tag{display:inline-block;margin-top:4px;padding:2px 7px;border-radius:8px;font-size:.67rem;font-weight:700;background:#F3F4F6;color:#6B7280}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:flex}
+.modal{background:white;border-radius:28px;padding:32px 28px;max-width:440px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.25);animation:popIn .3s cubic-bezier(.34,1.56,.64,1);position:relative}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+.modal-img{width:110px;height:110px;object-fit:contain;margin:0 auto 10px;display:block;filter:drop-shadow(0 8px 16px rgba(0,0,0,.15));animation:float 2s ease-in-out infinite}
+.modal-emoji-big{font-size:4.5rem;margin-bottom:8px;display:block}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.modal-article{font-size:1.5rem;font-weight:900;padding:5px 18px;border-radius:20px;color:white;display:inline-block;margin-bottom:7px}
+.modal h2{font-family:'Baloo 2',cursive;font-size:1.9rem;font-weight:800;color:#1F2937;margin-bottom:3px}
+.modal-english{font-size:1.05rem;color:#6B7280;font-weight:600;margin-bottom:14px}
+.modal-plural{background:#F3F4F6;border-radius:12px;padding:9px 14px;margin-bottom:12px;font-size:.9rem;color:#374151;font-weight:700}
+.modal-example{background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-radius:14px;padding:11px 14px;font-size:.88rem;color:#166534;font-weight:600;font-style:italic;margin-bottom:18px;border:2px solid #86EFAC}
+.modal-close{background:linear-gradient(135deg,var(--der),var(--die));color:white;border:none;padding:11px 30px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 4px 16px rgba(168,85,247,.4);transition:transform .15s}
+.modal-close:hover{transform:scale(1.05)}
+/* QUIZ */
+#quiz-section,#plural-quiz-section{display:none}
+.quiz-container{max-width:560px;margin:0 auto;padding:0 20px 40px}
+.quiz-card{background:white;border-radius:28px;padding:36px 28px;text-align:center;box-shadow:var(--shadow);margin-bottom:16px}
+.quiz-img{width:130px;height:130px;object-fit:contain;margin:0 auto 14px;display:block;animation:float 2s ease-in-out infinite}
+.quiz-emoji{font-size:4.5rem;margin-bottom:10px;display:block;animation:float 2s ease-in-out infinite}
+.quiz-question{font-family:'Baloo 2',cursive;font-size:1.2rem;color:#374151;margin-bottom:6px;font-weight:700}
+.quiz-word{font-family:'Baloo 2',cursive;font-size:2.2rem;font-weight:900;color:#1F2937;margin-bottom:20px}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quiz-btn{padding:13px 8px;border-radius:16px;border:3px solid #E5E7EB;background:white;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s;color:#374151}
+.quiz-btn:hover{transform:scale(1.04);border-color:var(--die)}
+.quiz-btn.correct{background:var(--green);border-color:var(--green);color:white}
+.quiz-btn.wrong{background:var(--red);border-color:var(--red);color:white}
+.quiz-feedback{font-size:1.1rem;font-weight:800;padding:14px;border-radius:16px;margin-top:14px;display:none}
+.quiz-feedback.show{display:block;animation:popIn .3s ease}
+.quiz-feedback.correct{background:#DCFCE7;color:#166534}
+.quiz-feedback.wrong{background:#FEE2E2;color:#991B1B}
+.quiz-progress{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.progress-bar{flex:1;height:12px;background:#E5E7EB;border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--der),var(--die));border-radius:20px;transition:width .4s ease}
+.score-badge{background:var(--gold);color:#78350F;padding:4px 12px;border-radius:20px;font-weight:900;font-size:.9rem}
+.next-btn{background:linear-gradient(135deg,#22C55E,#16A34A);color:white;border:none;padding:13px 34px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px;display:none;box-shadow:0 4px 16px rgba(34,197,94,.4);transition:transform .15s}
+.next-btn:hover{transform:scale(1.05)}
+.next-btn.show{display:inline-block;animation:popIn .3s ease}
+.score-screen{text-align:center;padding:36px 20px;max-width:480px;margin:0 auto;display:none}
+.score-screen.show{display:block;animation:fadeIn .5s ease}
+.big-score{font-family:'Baloo 2',cursive;font-size:4.5rem;font-weight:900;background:linear-gradient(135deg,var(--der),var(--die));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.restart-btn{background:linear-gradient(135deg,var(--der),var(--die));color:white;border:none;padding:14px 38px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:800;font-size:1.1rem;cursor:pointer;margin-top:20px;box-shadow:0 8px 24px rgba(168,85,247,.4);transition:transform .15s}
+.restart-btn:hover{transform:scale(1.05)}
+.confetti-piece{position:fixed;border-radius:2px;animation:confettiFall 2.5s ease-in forwards;z-index:9999;pointer-events:none}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="stars">⭐🌟⭐</div>
+  <h1>🇩🇪 Deutsch Lernen!</h1>
+  <p>Learn German — Gender, Plural &amp; Vocabulary • All 177 words</p>
+</div>
+
+<div class="legend">
+  <button class="legend-pill pill-der" onclick="filterGender('der')">🔵 DER — masculine</button>
+  <button class="legend-pill pill-die" onclick="filterGender('die')">🟣 DIE — feminine</button>
+  <button class="legend-pill pill-das" onclick="filterGender('das')">🔷 DAS — neuter</button>
+  <button class="legend-pill pill-all" onclick="filterGender('all')">🌍 Show All</button>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showSection('cards')">📚 Word Cards</button>
+  <button class="tab" onclick="showSection('quiz')">🎮 Gender Quiz</button>
+  <button class="tab" onclick="showSection('plural-quiz')">🔢 Plural Quiz</button>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="🔍 Search German or English..." oninput="filterSearch()">
+</div>
+
+<!-- CARDS -->
+<div id="cards-section">
+  <div class="section-header">
+    <h2>All Words <span class="count-badge" id="count-label">177 words</span></h2>
+  </div>
+  <div class="grid" id="wordGrid"></div>
+</div>
+
+<!-- GENDER QUIZ -->
+<div id="quiz-section">
+  <div class="quiz-container">
+    <div class="quiz-progress">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="score-badge">⭐ <span id="scoreNum">0</span></div>
+    </div>
+    <div class="quiz-card" id="quizCard">
+      <span id="quizEmoji" class="quiz-emoji"></span>
+      <img id="quizImg" class="quiz-img" style="display:none">
+      <div class="quiz-question">What is the article for this word?</div>
+      <div class="quiz-word" id="quizWord"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next word ➡️</button>
+    </div>
+    <div class="score-screen" id="scoreScreen">
+      <div style="font-size:3.5rem">🏆</div>
+      <div class="big-score" id="finalScore"></div>
+      <div style="font-size:1.2rem;font-weight:800;color:#374151;margin-top:6px" id="finalMsg"></div>
+      <button class="restart-btn" onclick="startQuiz()">🔄 Play Again!</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLURAL QUIZ -->
+<div id="plural-quiz-section">
+  <div class="quiz-container">
+    <div class="quiz-progress">
+      <div class="progress-bar"><div class="progress-fill" id="pProgressFill" style="width:0%"></div></div>
+      <div class="score-badge">⭐ <span id="pScoreNum">0</span></div>
+    </div>
+    <div class="quiz-card" id="pluralCard">
+      <span id="pQuizEmoji" class="quiz-emoji"></span>
+      <img id="pQuizImg" class="quiz-img" style="display:none">
+      <div class="quiz-question">What is the plural form?</div>
+      <div class="quiz-word" id="pQuizWord"></div>
+      <div class="quiz-options" id="pQuizOptions"></div>
+      <div class="quiz-feedback" id="pQuizFeedback"></div>
+      <button class="next-btn" id="pNextBtn" onclick="nextPluralQuestion()">Next ➡️</button>
+    </div>
+    <div class="score-screen" id="pScoreScreen">
+      <div style="font-size:3.5rem">🎉</div>
+      <div class="big-score" id="pFinalScore"></div>
+      <div style="font-size:1.2rem;font-weight:800;color:#374151;margin-top:6px">Plural Master!</div>
+      <button class="restart-btn" onclick="startPluralQuiz()">🔄 Play Again!</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <span id="mEmoji" class="modal-emoji-big"></span>
+    <img id="mImg" class="modal-img" style="display:none">
+    <div id="mArticle" class="modal-article"></div>
+    <h2 id="mWord"></h2>
+    <div class="modal-english" id="mEnglish"></div>
+    <div class="modal-plural" id="mPlural" style="display:none"></div>
+    <div class="modal-example" id="mExample" style="display:none"></div>
+    <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('show')">Got it! ✅</button>
+  </div>
+</div>
+
+<script>
+const words=[
+  {w:"Autobahn",art:"die",plural:"Autobahnen",en:"highway",em:"🛣️",img:"https://cdn-icons-png.flaticon.com/512/854/854929.png",ex:"Die Autobahn ist lang.",type:"noun"},
+  {w:"Butterbrot",art:"das",plural:"Butterbrote",en:"sandwich",em:"🥪",img:"https://cdn-icons-png.flaticon.com/512/1046/1046784.png",ex:"Das Butterbrot schmeckt gut.",type:"noun"},
+  {w:"Flasche",art:"die",plural:"Flaschen",en:"bottle",em:"🍼",img:"https://cdn-icons-png.flaticon.com/512/869/869869.png",ex:"Die Flasche ist leer.",type:"noun"},
+  {w:"Handtuch",art:"das",plural:"Handtücher",en:"towel",em:"🏊",img:"https://cdn-icons-png.flaticon.com/512/2917/2917995.png",ex:"Das Handtuch ist nass.",type:"noun"},
+  {w:"Kindergarten",art:"der",plural:"Kindergärten",en:"kindergarten",em:"🏫",img:"https://cdn-icons-png.flaticon.com/512/602/602175.png",ex:"Der Kindergarten ist groß.",type:"noun"},
+  {w:"Koffer",art:"der",plural:"Koffer",en:"suitcase",em:"🧳",img:"https://cdn-icons-png.flaticon.com/512/4695/4695819.png",ex:"Der Koffer ist schwer.",type:"noun"},
+  {w:"Nudel",art:"die",plural:"Nudeln",en:"noodle",em:"🍝",img:"https://cdn-icons-png.flaticon.com/512/1046/1046869.png",ex:"Die Nudel ist lang.",type:"noun"},
+  {w:"Würstchen",art:"das",plural:"Würstchen",en:"sausage",em:"🌭",img:"https://cdn-icons-png.flaticon.com/512/1046/1046736.png",ex:"Das Würstchen ist heiß.",type:"noun"},
+  {w:"Sprache",art:"die",plural:"Sprachen",en:"language",em:"💬",img:"https://cdn-icons-png.flaticon.com/512/3898/3898082.png",ex:"Die Sprache ist interessant.",type:"noun"},
+  {w:"Wort",art:"das",plural:"Wörter",en:"word",em:"📝",img:"https://cdn-icons-png.flaticon.com/512/1041/1041728.png",ex:"Das Wort ist neu.",type:"noun"},
+  {w:"Entschuldigung",art:"die",plural:"Entschuldigungen",en:"apology",em:"🙏",img:"https://cdn-icons-png.flaticon.com/512/4215/4215890.png",ex:"Die Entschuldigung ist wichtig.",type:"noun"},
+  {w:"Person",art:"die",plural:"Personen",en:"person",em:"👤",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",ex:"Die Person ist nett.",type:"noun"},
+  {w:"Situation",art:"die",plural:"Situationen",en:"situation",em:"🎭",img:"https://cdn-icons-png.flaticon.com/512/1067/1067566.png",ex:"Die Situation ist klar.",type:"noun"},
+  {w:"Name",art:"der",plural:"Namen",en:"name",em:"🏷️",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",ex:"Der Name ist schön.",type:"noun"},
+  {w:"Kursplakat",art:"das",plural:"Kursplakate",en:"course poster",em:"📋",img:"https://cdn-icons-png.flaticon.com/512/1534/1534938.png",ex:"Das Kursplakat ist bunt.",type:"noun"},
+  {w:"Nachname",art:"der",plural:"Nachnamen",en:"last name",em:"🪪",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",ex:"Der Nachname ist Müller.",type:"noun"},
+  {w:"Verb",art:"das",plural:"Verben",en:"verb",em:"📖",img:"https://cdn-icons-png.flaticon.com/512/1088/1088945.png",ex:"Das Verb ist wichtig.",type:"noun"},
+  {w:"Vorname",art:"der",plural:"Vornamen",en:"first name",em:"👤",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",ex:"Der Vorname ist Anna.",type:"noun"},
+  {w:"Antwort",art:"die",plural:"Antworten",en:"answer",em:"💡",img:"https://cdn-icons-png.flaticon.com/512/1086/1086740.png",ex:"Die Antwort ist richtig.",type:"noun"},
+  {w:"Telefon",art:"das",plural:"Telefone",en:"telephone",em:"📞",img:"https://cdn-icons-png.flaticon.com/512/455/455705.png",ex:"Das Telefon klingelt.",type:"noun"},
+  {w:"Aussagesatz",art:"der",plural:"Aussagesätze",en:"declarative sentence",em:"💬",img:"https://cdn-icons-png.flaticon.com/512/1041/1041728.png",ex:"Der Aussagesatz ist klar.",type:"noun"},
+  {w:"Interview",art:"das",plural:"Interviews",en:"interview",em:"🎤",img:"https://cdn-icons-png.flaticon.com/512/2953/2953395.png",ex:"Das Interview ist gut.",type:"noun"},
+  {w:"W-Frage",art:"die",plural:"W-Fragen",en:"w-question",em:"❓",img:"https://cdn-icons-png.flaticon.com/512/471/471715.png",ex:"Die W-Frage beginnt mit W.",type:"noun"},
+  {w:"Partner",art:"der",plural:"Partner",en:"partner (m)",em:"🤝",img:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png",ex:"Der Partner ist freundlich.",type:"noun"},
+  {w:"Partnerin",art:"die",plural:"Partnerinnen",en:"partner (f)",em:"🤝",img:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png",ex:"Die Partnerin ist freundlich.",type:"noun"},
+  {w:"Buchstabe",art:"der",plural:"Buchstaben",en:"letter",em:"🔤",img:"https://cdn-icons-png.flaticon.com/512/2592/2592935.png",ex:"Der Buchstabe A ist groß.",type:"noun"},
+  {w:"Handynummer",art:"die",plural:"Handynummern",en:"mobile number",em:"📱",img:"https://cdn-icons-png.flaticon.com/512/0/191.png",ex:"Die Handynummer ist lang.",type:"noun"},
+  {w:"Telefonnummer",art:"die",plural:"Telefonnummern",en:"phone number",em:"☎️",img:"https://cdn-icons-png.flaticon.com/512/455/455705.png",ex:"Die Telefonnummer ist kurz.",type:"noun"},
+  {w:"Alphabet",art:"das",plural:"Alphabete",en:"alphabet",em:"🔡",img:"https://cdn-icons-png.flaticon.com/512/2592/2592935.png",ex:"Das Alphabet hat 26 Buchstaben.",type:"noun"},
+  {w:"E-Mail-Adresse",art:"die",plural:"E-Mail-Adressen",en:"email address",em:"📧",img:"https://cdn-icons-png.flaticon.com/512/552/552486.png",ex:"Die E-Mail-Adresse ist neu.",type:"noun"},
+  {w:"Gespräch",art:"das",plural:"Gespräche",en:"conversation",em:"💭",img:"https://cdn-icons-png.flaticon.com/512/1041/1041916.png",ex:"Das Gespräch ist lang.",type:"noun"},
+  {w:"Punkt",art:"der",plural:"Punkte",en:"period / point",em:"⚫",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",ex:"Der Punkt steht am Satzende.",type:"noun"},
+  {w:"Unterstrich",art:"der",plural:"Unterstriche",en:"underscore",em:"➖",img:"https://cdn-icons-png.flaticon.com/512/1041/1041728.png",ex:"Der Unterstrich ist lang.",type:"noun"},
+  {w:"Dialog",art:"der",plural:"Dialoge",en:"dialogue",em:"🗣️",img:"https://cdn-icons-png.flaticon.com/512/1041/1041916.png",ex:"Der Dialog ist interessant.",type:"noun"},
+  {w:"Zahl",art:"die",plural:"Zahlen",en:"number",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",ex:"Die Zahl ist groß.",type:"noun"},
+  {w:"Land",art:"das",plural:"Länder",en:"country",em:"🌍",img:"https://cdn-icons-png.flaticon.com/512/921/921490.png",ex:"Das Land ist groß.",type:"noun"},
+  {w:"Tabelle",art:"die",plural:"Tabellen",en:"table / chart",em:"📊",img:"https://cdn-icons-png.flaticon.com/512/3437/3437556.png",ex:"Die Tabelle ist groß.",type:"noun"},
+  {w:"Stadt",art:"die",plural:"Städte",en:"city",em:"🏙️",img:"https://cdn-icons-png.flaticon.com/512/2991/2991158.png",ex:"Die Stadt ist schön.",type:"noun"},
+  {w:"Text",art:"der",plural:"Texte",en:"text",em:"📄",img:"https://cdn-icons-png.flaticon.com/512/1534/1534938.png",ex:"Der Text ist interessant.",type:"noun"},
+  {w:"Grammatik",art:"die",plural:"Grammatiken",en:"grammar",em:"📚",img:"https://cdn-icons-png.flaticon.com/512/1697/1697077.png",ex:"Die Grammatik ist wichtig.",type:"noun"},
+  {w:"Redemittel",art:"das",plural:"Redemittel",en:"useful phrases",em:"💬",img:"https://cdn-icons-png.flaticon.com/512/3898/3898082.png",ex:"Das Redemittel ist praktisch.",type:"noun"},
+  {w:"Subjekt",art:"das",plural:"Subjekte",en:"subject",em:"🔍",img:"https://cdn-icons-png.flaticon.com/512/1041/1041728.png",ex:"Das Subjekt ist im Satz.",type:"noun"},
+  // Languages
+  {w:"Bulgarisch",art:"–",plural:"–",en:"Bulgarian",em:"🇧🇬",img:"https://cdn-icons-png.flaticon.com/512/197/197402.png",type:"language"},
+  {w:"Deutsch",art:"–",plural:"–",en:"German",em:"🇩🇪",img:"https://cdn-icons-png.flaticon.com/512/197/197571.png",type:"language"},
+  {w:"Englisch",art:"–",plural:"–",en:"English",em:"🇬🇧",img:"https://cdn-icons-png.flaticon.com/512/197/197374.png",type:"language"},
+  {w:"Indonesisch",art:"–",plural:"–",en:"Indonesian",em:"🇮🇩",img:"https://cdn-icons-png.flaticon.com/512/197/197559.png",type:"language"},
+  {w:"Italienisch",art:"–",plural:"–",en:"Italian",em:"🇮🇹",img:"https://cdn-icons-png.flaticon.com/512/197/197626.png",type:"language"},
+  {w:"Japanisch",art:"–",plural:"–",en:"Japanese",em:"🇯🇵",img:"https://cdn-icons-png.flaticon.com/512/197/197604.png",type:"language"},
+  {w:"Russisch",art:"–",plural:"–",en:"Russian",em:"🇷🇺",img:"https://cdn-icons-png.flaticon.com/512/197/197408.png",type:"language"},
+  {w:"Serbisch",art:"–",plural:"–",en:"Serbian",em:"🇷🇸",img:"https://cdn-icons-png.flaticon.com/512/197/197450.png",type:"language"},
+  {w:"Türkisch",art:"–",plural:"–",en:"Turkish",em:"🇹🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197518.png",type:"language"},
+  {w:"Ungarisch",art:"–",plural:"–",en:"Hungarian",em:"🇭🇺",img:"https://cdn-icons-png.flaticon.com/512/197/197584.png",type:"language"},
+  {w:"Spanisch",art:"–",plural:"–",en:"Spanish",em:"🇪🇸",img:"https://cdn-icons-png.flaticon.com/512/197/197593.png",type:"language"},
+  {w:"Französisch",art:"–",plural:"–",en:"French",em:"🇫🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197560.png",type:"language"},
+  {w:"Polnisch",art:"–",plural:"–",en:"Polish",em:"🇵🇱",img:"https://cdn-icons-png.flaticon.com/512/197/197529.png",type:"language"},
+  {w:"Portugiesisch",art:"–",plural:"–",en:"Portugese",em:"🇵🇹",img:"https://cdn-icons-png.flaticon.com/512/197/197463.png",type:"language"},
+  {w:"Arabisch",art:"–",plural:"–",en:"Arabic",em:"🇸🇦",img:"https://cdn-icons-png.flaticon.com/512/197/197376.png",type:"language"},
+  // Countries
+  {w:"Deutschland",art:"–",plural:"–",en:"Germany",em:"🇩🇪",img:"https://cdn-icons-png.flaticon.com/512/197/197571.png",type:"country"},
+  {w:"Österreich",art:"–",plural:"–",en:"Austria",em:"🇦🇹",img:"https://cdn-icons-png.flaticon.com/512/197/197447.png",type:"country"},
+  {w:"Japan",art:"–",plural:"–",en:"Japan",em:"🇯🇵",img:"https://cdn-icons-png.flaticon.com/512/197/197604.png",type:"country"},
+  {w:"Brasilien",art:"–",plural:"–",en:"Brasil",em:"🇧🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197386.png",type:"country"},
+  {w:"Algerien",art:"–",plural:"–",en:"Algeria",em:"🇩🇿",img:"https://cdn-icons-png.flaticon.com/512/197/197579.png",type:"country"},
+  {w:"Frankreich",art:"–",plural:"–",en:"France",em:"🇫🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197560.png",type:"country"},
+  {w:"Griechenland",art:"–",plural:"–",en:"Greece",em:"🇬🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197566.png",type:"country"},
+  {w:"Italien",art:"–",plural:"–",en:"Italy",em:"🇮🇹",img:"https://cdn-icons-png.flaticon.com/512/197/197626.png",type:"country"},
+  {w:"Mexiko",art:"–",plural:"–",en:"Mexico",em:"🇲🇽",img:"https://cdn-icons-png.flaticon.com/512/197/197697.png",type:"country"},
+  {w:"Portugal",art:"–",plural:"–",en:"Portugal",em:"🇵🇹",img:"https://cdn-icons-png.flaticon.com/512/197/197463.png",type:"country"},
+  {w:"Thailand",art:"–",plural:"–",en:"Thailand",em:"🇹🇭",img:"https://cdn-icons-png.flaticon.com/512/197/197614.png",type:"country"},
+  {w:"Polen",art:"–",plural:"–",en:"Poland",em:"🇵🇱",img:"https://cdn-icons-png.flaticon.com/512/197/197529.png",type:"country"},
+  {w:"Russland",art:"–",plural:"–",en:"Russia",em:"🇷🇺",img:"https://cdn-icons-png.flaticon.com/512/197/197408.png",type:"country"},
+  {w:"Spanien",art:"–",plural:"–",en:"Spain",em:"🇪🇸",img:"https://cdn-icons-png.flaticon.com/512/197/197593.png",type:"country"},
+  {w:"die Schweiz",art:"–",plural:"–",en:"Switzerland",em:"🇨🇭",img:"https://cdn-icons-png.flaticon.com/512/197/197540.png",type:"country"},
+  {w:"die Türkei",art:"–",plural:"–",en:"Turkey",em:"🇹🇷",img:"https://cdn-icons-png.flaticon.com/512/197/197518.png",type:"country"},
+  {w:"die Ukraine",art:"–",plural:"–",en:"Ukraine",em:"🇺🇦",img:"https://cdn-icons-png.flaticon.com/512/197/197572.png",type:"country"},
+  // Numbers
+  {w:"null",art:"–",plural:"–",en:"zero",em:"0️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"eins",art:"–",plural:"–",en:"one",em:"1️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"zwei",art:"–",plural:"–",en:"two",em:"2️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"drei",art:"–",plural:"–",en:"three",em:"3️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"vier",art:"–",plural:"–",en:"four",em:"4️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"fünf",art:"–",plural:"–",en:"five",em:"5️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"sechs",art:"–",plural:"–",en:"six",em:"6️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"sieben",art:"–",plural:"–",en:"seven",em:"7️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"acht",art:"–",plural:"–",en:"eight",em:"8️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"neun",art:"–",plural:"–",en:"nine",em:"9️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"zehn",art:"–",plural:"–",en:"ten",em:"🔟",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"elf",art:"–",plural:"–",en:"eleven",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"zwölf",art:"–",plural:"–",en:"twelve",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"dreizehn",art:"–",plural:"–",en:"thirteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"vierzehn",art:"–",plural:"–",en:"fourteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"fünfzehn",art:"–",plural:"–",en:"fifteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"sechzehn",art:"–",plural:"–",en:"sixteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"siebzehn",art:"–",plural:"–",en:"seventeen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"achtzehn",art:"–",plural:"–",en:"eighteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"neunzehn",art:"–",plural:"–",en:"nineteen",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  {w:"zwanzig",art:"–",plural:"–",en:"twenty",em:"🔢",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"number"},
+  // Phrases
+  {w:"guten Tag",art:"–",plural:"–",en:"Good day! / Hello!",em:"👋",img:"https://cdn-icons-png.flaticon.com/512/2954/2954885.png",type:"phrase"},
+  {w:"hallo",art:"–",plural:"–",en:"hello",em:"👋",img:"https://cdn-icons-png.flaticon.com/512/2954/2954885.png",type:"phrase"},
+  {w:"tschüs",art:"–",plural:"–",en:"bye",em:"👋",img:"https://cdn-icons-png.flaticon.com/512/2954/2954885.png",type:"phrase"},
+  {w:"ciao",art:"–",plural:"–",en:"bye (informal)",em:"👋",img:"https://cdn-icons-png.flaticon.com/512/2954/2954885.png",type:"phrase"},
+  {w:"bis bald",art:"–",plural:"–",en:"see you soon",em:"⏰",img:"https://cdn-icons-png.flaticon.com/512/2965/2965300.png",type:"phrase"},
+  {w:"auf Wiedersehen",art:"–",plural:"–",en:"goodbye",em:"👋",img:"https://cdn-icons-png.flaticon.com/512/2954/2954885.png",type:"phrase"},
+  {w:"gute Nacht",art:"–",plural:"–",en:"good night",em:"🌙",img:"https://cdn-icons-png.flaticon.com/512/1164/1164954.png",type:"phrase"},
+  {w:"guten Abend",art:"–",plural:"–",en:"good evening",em:"🌆",img:"https://cdn-icons-png.flaticon.com/512/1164/1164954.png",type:"phrase"},
+  {w:"guten Morgen",art:"–",plural:"–",en:"good morning",em:"🌅",img:"https://cdn-icons-png.flaticon.com/512/3202/3202926.png",type:"phrase"},
+  {w:"danke",art:"–",plural:"–",en:"thank you",em:"🙏",img:"https://cdn-icons-png.flaticon.com/512/4215/4215890.png",type:"phrase"},
+  {w:"bitte",art:"–",plural:"–",en:"please",em:"🙏",img:"https://cdn-icons-png.flaticon.com/512/4215/4215890.png",type:"phrase"},
+  // Verbs
+  {w:"heißen",art:"–",plural:"–",en:"to be called",em:"🏷️",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"verb"},
+  {w:"sein",art:"–",plural:"–",en:"to be",em:"🔵",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"verb"},
+  {w:"kommen",art:"–",plural:"–",en:"to come from",em:"🏠",img:"https://cdn-icons-png.flaticon.com/512/619/619153.png",type:"verb"},
+  {w:"wohnen",art:"–",plural:"–",en:"to live",em:"🏠",img:"https://cdn-icons-png.flaticon.com/512/619/619153.png",type:"verb"},
+  {w:"sprechen",art:"–",plural:"–",en:"to speak",em:"🗣️",img:"https://cdn-icons-png.flaticon.com/512/3898/3898082.png",type:"verb"},
+  {w:"lernen",art:"–",plural:"–",en:"to learn",em:"📚",img:"https://cdn-icons-png.flaticon.com/512/1697/1697077.png",type:"verb"},
+  {w:"machen",art:"–",plural:"–",en:"to make / do",em:"🔨",img:"https://cdn-icons-png.flaticon.com/512/1791/1791961.png",type:"verb"},
+  {w:"kennen",art:"–",plural:"–",en:"to know",em:"💡",img:"https://cdn-icons-png.flaticon.com/512/1086/1086740.png",type:"verb"},
+  {w:"hören",art:"–",plural:"–",en:"to hear",em:"👂",img:"https://cdn-icons-png.flaticon.com/512/1048/1048953.png",type:"verb"},
+  {w:"lesen",art:"–",plural:"–",en:"to read",em:"📖",img:"https://cdn-icons-png.flaticon.com/512/1697/1697077.png",type:"verb"},
+  {w:"schreiben",art:"–",plural:"–",en:"to write",em:"✍️",img:"https://cdn-icons-png.flaticon.com/512/1088/1088945.png",type:"verb"},
+  {w:"sagen",art:"–",plural:"–",en:"to say",em:"💬",img:"https://cdn-icons-png.flaticon.com/512/1041/1041916.png",type:"verb"},
+  {w:"spielen",art:"–",plural:"–",en:"to play",em:"🎮",img:"https://cdn-icons-png.flaticon.com/512/2991/2991195.png",type:"verb"},
+  {w:"fragen",art:"–",plural:"–",en:"to ask",em:"❓",img:"https://cdn-icons-png.flaticon.com/512/471/471715.png",type:"verb"},
+  {w:"verstehen",art:"–",plural:"–",en:"to understand",em:"💡",img:"https://cdn-icons-png.flaticon.com/512/1086/1086740.png",type:"verb"},
+  {w:"buchstabieren",art:"–",plural:"–",en:"to spell",em:"🔤",img:"https://cdn-icons-png.flaticon.com/512/2592/2592935.png",type:"verb"},
+  {w:"mitsprechen",art:"–",plural:"–",en:"to speak along",em:"🗣️",img:"https://cdn-icons-png.flaticon.com/512/3898/3898082.png",type:"verb"},
+  {w:"gehen",art:"–",plural:"–",en:"to go",em:"🚶",img:"https://cdn-icons-png.flaticon.com/512/2767/2767999.png",type:"verb"},
+  {w:"vorstellen",art:"–",plural:"–",en:"to introduce",em:"🤝",img:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png",type:"verb"},
+  {w:"raten",art:"–",plural:"–",en:"to guess",em:"🤔",img:"https://cdn-icons-png.flaticon.com/512/1029/1029183.png",type:"verb"},
+  {w:"notieren",art:"–",plural:"–",en:"to note",em:"📝",img:"https://cdn-icons-png.flaticon.com/512/1041/1041728.png",type:"verb"},
+  {w:"sammeln",art:"–",plural:"–",en:"to collect",em:"📦",img:"https://cdn-icons-png.flaticon.com/512/1046/1046434.png",type:"verb"},
+  // Adjectives / other
+  {w:"gut",art:"–",plural:"–",en:"good",em:"👍",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adjective"},
+  {w:"international",art:"–",plural:"–",en:"international",em:"🌐",img:"https://cdn-icons-png.flaticon.com/512/921/921490.png",type:"adjective"},
+  {w:"formell",art:"–",plural:"–",en:"formal",em:"🎩",img:"https://cdn-icons-png.flaticon.com/512/1046/1046434.png",type:"adjective"},
+  {w:"informell",art:"–",plural:"–",en:"informal",em:"😊",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",type:"adjective"},
+  {w:"laut",art:"–",plural:"–",en:"loud",em:"📢",img:"https://cdn-icons-png.flaticon.com/512/727/727218.png",type:"adjective"},
+  {w:"langsam",art:"–",plural:"–",en:"slow",em:"🐢",img:"https://cdn-icons-png.flaticon.com/512/616/616460.png",type:"adjective"},
+  {w:"kurz",art:"–",plural:"–",en:"short",em:"📏",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adjective"},
+  {w:"bekannt",art:"–",plural:"–",en:"well-known",em:"⭐",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adjective"},
+  {w:"sehr",art:"–",plural:"–",en:"very",em:"⭐",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adverb"},
+  {w:"auch",art:"–",plural:"–",en:"also",em:"➕",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adverb"},
+  {w:"nicht",art:"–",plural:"–",en:"not",em:"❌",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adverb"},
+  {w:"noch einmal",art:"–",plural:"–",en:"once more",em:"🔁",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adverb"},
+  {w:"ganz",art:"–",plural:"–",en:"quite / pretty",em:"✨",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"adverb"},
+  // Pronouns
+  {w:"ich",art:"–",plural:"–",en:"I",em:"🙋",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",type:"pronoun"},
+  {w:"du",art:"–",plural:"–",en:"you (informal)",em:"🫵",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",type:"pronoun"},
+  {w:"er",art:"–",plural:"–",en:"he",em:"👦",img:"https://cdn-icons-png.flaticon.com/512/1077/1077012.png",type:"pronoun"},
+  {w:"sie",art:"–",plural:"–",en:"she / they",em:"👧",img:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png",type:"pronoun"},
+  {w:"Sie",art:"–",plural:"–",en:"you (formal)",em:"🫵",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",type:"pronoun"},
+  {w:"wer",art:"–",plural:"–",en:"who",em:"❓",img:"https://cdn-icons-png.flaticon.com/512/471/471715.png",type:"pronoun"},
+  {w:"was",art:"–",plural:"–",en:"what",em:"❓",img:"https://cdn-icons-png.flaticon.com/512/471/471715.png",type:"pronoun"},
+  {w:"wo",art:"–",plural:"–",en:"where",em:"📍",img:"https://cdn-icons-png.flaticon.com/512/684/684908.png",type:"pronoun"},
+  {w:"woher",art:"–",plural:"–",en:"from where",em:"🧭",img:"https://cdn-icons-png.flaticon.com/512/854/854929.png",type:"pronoun"},
+  {w:"wie",art:"–",plural:"–",en:"how / what",em:"❔",img:"https://cdn-icons-png.flaticon.com/512/471/471715.png",type:"pronoun"},
+  // Useful words
+  {w:"und",art:"–",plural:"–",en:"and",em:"➕",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"word"},
+  {w:"oder",art:"–",plural:"–",en:"or",em:"🔀",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"word"},
+  {w:"ein/eine",art:"–",plural:"–",en:"a / an",em:"1️⃣",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"word"},
+  {w:"mein/meine",art:"–",plural:"–",en:"my",em:"💙",img:"https://cdn-icons-png.flaticon.com/512/1077/1077063.png",type:"word"},
+  {w:"Herr",art:"–",plural:"–",en:"Mr",em:"👨",img:"https://cdn-icons-png.flaticon.com/512/1077/1077012.png",type:"word"},
+  {w:"Frau",art:"–",plural:"–",en:"Miss / Mrs / Ms",em:"👩",img:"https://cdn-icons-png.flaticon.com/512/1077/1077114.png",type:"word"},
+  {w:"in",art:"–",plural:"–",en:"in",em:"📦",img:"https://cdn-icons-png.flaticon.com/512/1046/1046434.png",type:"word"},
+  {w:"aus",art:"–",plural:"–",en:"from",em:"📍",img:"https://cdn-icons-png.flaticon.com/512/684/684908.png",type:"word"},
+  {w:"auf",art:"–",plural:"–",en:"in / on",em:"📍",img:"https://cdn-icons-png.flaticon.com/512/684/684908.png",type:"word"},
+  {w:"ein bisschen",art:"–",plural:"–",en:"a little",em:"🤏",img:"https://cdn-icons-png.flaticon.com/512/1828/1828884.png",type:"word"},
+  {w:"minus",art:"–",plural:"–",en:"minus",em:"➖",img:"https://cdn-icons-png.flaticon.com/512/900/900782.png",type:"word"},
+];
+
+const typeBadge={language:"🗣 lang",country:"🌍 country",number:"🔢 number",phrase:"💬 phrase",verb:"🏃 verb",adjective:"✨ adj",adverb:"⚡ adverb",pronoun:"👤 pronoun",word:"📝 word",noun:"noun"};
+const typeBg={language:"#FFF7ED",country:"#EFF6FF",number:"#FAF5FF",phrase:"#F0FDF4",verb:"#DCFCE7",adjective:"#FEFCE8",adverb:"#FEFCE8",pronoun:"#FFF1F2",word:"#F8FAFC"};
+
+let currentFilter='all',currentSearch='';
+let quizWords=[],qIdx=0,score=0;
+let pQuizWords=[],pIdx=0,pScore=0;
+
+function getClass(w){if(w.art==='der')return'der';if(w.art==='die')return'die';if(w.art==='das')return'das';return'other';}
+
+function setImg(imgEl,emojiEl,src){
+  imgEl.src=src;imgEl.style.display='block';emojiEl.style.display='none';
+  imgEl.onerror=()=>{imgEl.style.display='none';emojiEl.style.display='block';};
+}
+
+function renderCards(){
+  const grid=document.getElementById('wordGrid');
+  const filtered=words.filter(w=>{
+    const mg=currentFilter==='all'||w.art===currentFilter;
+    const s=currentSearch.toLowerCase();
+    const ms=!s||w.w.toLowerCase().includes(s)||w.en.toLowerCase().includes(s);
+    return mg&&ms;
+  });
+  document.getElementById('count-label').textContent=filtered.length+' words';
+  grid.innerHTML=filtered.map((w,i)=>{
+    const cls=getClass(w);
+    const badge=w.art!=='–'?w.art.toUpperCase():(typeBadge[w.type]||w.type);
+    const bg=w.type!=='noun'?`style="background:${typeBg[w.type]||'#F8FAFC'}"` :'';
+    const pl=w.plural!=='–'?`<span class="plural-tag">pl: ${w.plural}</span>`:'';
+    return`<div class="card ${cls}" onclick="openModal(${words.indexOf(w)})" style="animation-delay:${i*.025}s">
+      <div class="card-top" ${bg}>
+        <span class="article-badge">${badge}</span>
+        <img class="card-img" src="${w.img}" alt="${w.em}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <span style="display:none;font-size:2.8rem">${w.em}</span>
+      </div>
+      <div class="card-body">
+        <div class="german-word">${w.w}</div>
+        <div class="english-word">${w.en}</div>
+        ${pl}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterGender(g){currentFilter=g;renderCards();}
+function filterSearch(){currentSearch=document.getElementById('searchInput').value;renderCards();}
+
+function openModal(idx){
+  const w=words[idx];
+  const ac={der:'#FF6B9D',die:'#A855F7',das:'#0891B2'};
+  document.getElementById('mEmoji').textContent=w.em;
+  setImg(document.getElementById('mImg'),document.getElementById('mEmoji'),w.img);
+  const art=document.getElementById('mArticle');
+  art.textContent=w.art!=='–'?w.art.toUpperCase():(typeBadge[w.type]||w.type);
+  art.style.background=ac[w.art]||'#16A34A';
+  document.getElementById('mWord').textContent=w.w;
+  document.getElementById('mEnglish').textContent='🇬🇧 '+w.en;
+  const pl=document.getElementById('mPlural');
+  if(w.plural!=='–'){pl.textContent='📚 Plural: die '+w.plural;pl.style.display='block';}else{pl.style.display='none';}
+  const ex=document.getElementById('mExample');
+  if(w.ex){ex.textContent='✏️ '+w.ex;ex.style.display='block';}else{ex.style.display='none';}
+  document.getElementById('modalOverlay').classList.add('show');
+}
+function closeModal(e){if(e.target.id==='modalOverlay')document.getElementById('modalOverlay').classList.remove('show');}
+
+function showSection(sec){
+  ['cards','quiz','plural-quiz'].forEach(s=>{
+    document.getElementById(s+'-section').style.display=s===sec?'block':'none';
+  });
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['cards','quiz','plural-quiz'][i]===sec));
+  document.querySelector('.search-bar').style.display=sec==='cards'?'flex':'none';
+  document.querySelector('.legend').style.display=sec==='cards'?'flex':'none';
+  if(sec==='quiz')startQuiz();
+  if(sec==='plural-quiz')startPluralQuiz();
+}
+
+function shuffle(a){return[...a].sort(()=>Math.random()-.5);}
+
+// GENDER QUIZ
+function startQuiz(){
+  quizWords=shuffle(words.filter(w=>['der','die','das'].includes(w.art)));
+  qIdx=0;score=0;
+  document.getElementById('scoreScreen').classList.remove('show');
+  document.getElementById('quizCard').style.display='block';
+  document.getElementById('scoreNum').textContent=0;
+  renderQuestion();
+}
+function renderQuestion(){
+  if(qIdx>=quizWords.length){showFinalScore();return;}
+  const w=quizWords[qIdx];
+  document.getElementById('progressFill').style.width=(qIdx/quizWords.length*100)+'%';
+  document.getElementById('quizEmoji').textContent=w.em;
+  setImg(document.getElementById('quizImg'),document.getElementById('quizEmoji'),w.img);
+  document.getElementById('quizWord').textContent=w.w;
+  document.getElementById('quizFeedback').className='quiz-feedback';
+  document.getElementById('nextBtn').classList.remove('show');
+  document.getElementById('quizOptions').innerHTML=shuffle(['der','die','das']).map(o=>
+    `<button class="quiz-btn" onclick="checkAnswer('${o}','${w.art}')">${o.toUpperCase()}</button>`
+  ).join('');
+}
+function checkAnswer(chosen,correct){
+  document.querySelectorAll('.quiz-btn').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.toLowerCase()===correct)b.classList.add('correct');
+    if(b.textContent.toLowerCase()===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('quizFeedback');
+  if(chosen===correct){score++;document.getElementById('scoreNum').textContent=score;fb.textContent='🎉 Correct! Well done! 🌟';fb.className='quiz-feedback correct show';confetti();}
+  else{fb.textContent=`❌ Not quite! It's ${correct.toUpperCase()} ${quizWords[qIdx].w}`;fb.className='quiz-feedback wrong show';}
+  document.getElementById('nextBtn').classList.add('show');
+}
+function nextQuestion(){qIdx++;renderQuestion();}
+function showFinalScore(){
+  document.getElementById('quizCard').style.display='none';
+  document.getElementById('scoreScreen').classList.add('show');
+  const pct=Math.round(score/quizWords.length*100);
+  document.getElementById('finalScore').textContent=score+' / '+quizWords.length;
+  document.getElementById('finalMsg').textContent=pct>=80?'🌟 You are a German star!':pct>=50?'👍 Keep practicing!':'📚 Keep studying — you got this!';
+  for(let i=0;i<35;i++)setTimeout(confetti,i*70);
+}
+
+// PLURAL QUIZ
+function startPluralQuiz(){
+  pQuizWords=shuffle(words.filter(w=>w.plural!=='–'));
+  pIdx=0;pScore=0;
+  document.getElementById('pScoreScreen').classList.remove('show');
+  document.getElementById('pluralCard').style.display='block';
+  document.getElementById('pScoreNum').textContent=0;
+  renderPluralQuestion();
+}
+function renderPluralQuestion(){
+  if(pIdx>=pQuizWords.length){
+    document.getElementById('pluralCard').style.display='none';
+    document.getElementById('pScoreScreen').classList.add('show');
+    document.getElementById('pFinalScore').textContent=pScore+' / '+pQuizWords.length;
+    for(let i=0;i<35;i++)setTimeout(confetti,i*70);
+    return;
+  }
+  const w=pQuizWords[pIdx];
+  document.getElementById('pProgressFill').style.width=(pIdx/pQuizWords.length*100)+'%';
+  document.getElementById('pQuizEmoji').textContent=w.em;
+  setImg(document.getElementById('pQuizImg'),document.getElementById('pQuizEmoji'),w.img);
+  document.getElementById('pQuizWord').textContent=w.art.toUpperCase()+' '+w.w;
+  document.getElementById('pQuizFeedback').className='quiz-feedback';
+  document.getElementById('pNextBtn').classList.remove('show');
+  const others=shuffle(pQuizWords.filter((_,i)=>i!==pIdx)).slice(0,3).map(x=>x.plural);
+  document.getElementById('pQuizOptions').innerHTML=shuffle([w.plural,...others]).map(o=>
+    `<button class="quiz-btn" onclick="checkPlural('${o.replace(/'/g,"\\'")}','${w.plural.replace(/'/g,"\\'")}')">${o}</button>`
+  ).join('');
+}
+function checkPlural(chosen,correct){
+  document.querySelectorAll('#pQuizOptions .quiz-btn').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent===correct)b.classList.add('correct');
+    if(b.textContent===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  const fb=document.getElementById('pQuizFeedback');
+  if(chosen===correct){pScore++;document.getElementById('pScoreNum').textContent=pScore;fb.textContent='🎉 Correct! Great job! 🌟';fb.className='quiz-feedback correct show';confetti();}
+  else{fb.textContent='❌ The plural is: '+correct;fb.className='quiz-feedback wrong show';}
+  document.getElementById('pNextBtn').classList.add('show');
+}
+function nextPluralQuestion(){pIdx++;renderPluralQuestion();}
+
+// CONFETTI
+function confetti(){
+  const colors=['#FF6B9D','#A855F7','#22D3EE','#FFD700','#22C55E','#FB923C'];
+  const el=document.createElement('div');
+  el.className='confetti-piece';
+  el.style.cssText=`left:${Math.random()*100}vw;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;border-radius:${Math.random()>.5?'50%':'3px'};animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.3}s;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),3500);
+}
+
+renderCards();
+</script>
+</body>
+</html>

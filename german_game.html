@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇩🇪 Deutsch Lernen! – Netzwerk Neu A1</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --der: #FF6B9D;
+  --die: #A855F7;
+  --das: #22D3EE;
+  --der-light: #FFE0EE;
+  --die-light: #F3E8FF;
+  --das-light: #CFFAFE;
+  --gold: #FBBF24;
+  --green: #22C55E;
+  --red: #EF4444;
+  --bg: #FFF8F0;
+  --card: #FFFFFF;
+  --text: #1E1B4B;
+  --muted: #6B7280;
+  --shadow: 0 8px 32px rgba(0,0,0,0.12);
+  --radius: 24px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 15% 20%, #FFE4F3 0%, transparent 35%),
+    radial-gradient(circle at 85% 10%, #E0F2FE 0%, transparent 30%),
+    radial-gradient(circle at 50% 90%, #F3E8FF 0%, transparent 40%);
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  position: relative;
+}
+.header h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, #FF6B9D, #A855F7, #22D3EE);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  animation: titlePop 0.8s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes titlePop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.header p { color: var(--muted); font-size: 1.1rem; margin-top: .5rem; font-weight: 700; }
+
+/* ── NAV TABS ── */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,248,240,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid #F3E8FF;
+}
+.tab-btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: .5rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all .2s;
+  background: white;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+.tab-btn.active { color: white; border-color: transparent; transform: translateY(-2px); }
+.tab-btn[data-tab="reference"].active { background: var(--text); }
+.tab-btn[data-tab="gender"].active    { background: linear-gradient(135deg, var(--der), var(--die)); }
+.tab-btn[data-tab="plural"].active    { background: linear-gradient(135deg, #F97316, #FBBF24); }
+.tab-btn[data-tab="sort"].active      { background: linear-gradient(135deg, #22D3EE, #22C55E); }
+.tab-btn[data-tab="quiz"].active      { background: linear-gradient(135deg, #A855F7, #EC4899); }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 1.5rem 1rem 3rem; max-width: 1100px; margin: 0 auto; }
+.section.active { display: block; animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: none; } }
+
+.section-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ── GENDER KEY BANNER ── */
+.gender-key {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.gender-badge {
+  padding: .5rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+.badge-der { background: var(--der); animation-delay: .1s; }
+.badge-die { background: var(--die); animation-delay: .2s; }
+.badge-das { background: var(--das); color: #0E7490; animation-delay: .3s; }
+@keyframes popIn { from { transform:scale(0.7); opacity:0; } to { transform:scale(1); opacity:1; } }
+
+/* ── NOUN CARDS GRID ── */
+.noun-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+.noun-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.2rem .8rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  border: 3px solid transparent;
+  transition: transform .2s, box-shadow .2s;
+  cursor: default;
+  animation: cardPop .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+.noun-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 28px rgba(0,0,0,.14); }
+.noun-card.der { border-color: var(--der); background: var(--der-light); }
+.noun-card.die { border-color: var(--die); background: var(--die-light); }
+.noun-card.das { border-color: var(--das); background: var(--das-light); }
+@keyframes cardPop { from { transform:scale(0.8); opacity:0; } to { transform:scale(1); opacity:1; } }
+
+.noun-emoji { font-size: 2.6rem; margin-bottom: .4rem; line-height: 1; display: block; }
+.noun-article {
+  display: inline-block;
+  padding: .15rem .7rem;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: .8rem;
+  color: white;
+  margin-bottom: .4rem;
+}
+.art-der { background: var(--der); }
+.art-die { background: var(--die); }
+.art-das { background: var(--das); color: #0E7490; }
+.noun-word { font-weight: 800; font-size: 1rem; display: block; color: var(--text); }
+.noun-plural { font-size: .75rem; color: var(--muted); font-weight: 600; }
+.noun-english { font-size: .8rem; color: #6B7280; margin-top: .2rem; font-style: italic; }
+
+/* ── SEARCH ── */
+.search-bar {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+  padding: .75rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid #E5E7EB;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  transition: border-color .2s;
+}
+.search-bar:focus { border-color: var(--die); }
+
+/* ── GAME AREA ── */
+.game-container {
+  max-width: 750px;
+  margin: 0 auto;
+}
+.score-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.score-item { text-align: center; }
+.score-label { font-size: .75rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+.score-value { font-family: 'Fredoka One', cursive; font-size: 2rem; line-height: 1; }
+.score-correct  { color: var(--green); }
+.score-wrong    { color: var(--red); }
+.score-progress { color: var(--die); }
+
+.question-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--der), var(--die), var(--das));
+}
+.q-emoji { font-size: 5rem; display: block; margin-bottom: 1rem; animation: emojiWiggle .5s ease; }
+@keyframes emojiWiggle { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 75%{transform:rotate(8deg)} }
+.q-word { font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: var(--text); }
+.q-english { color: var(--muted); font-size: 1.1rem; font-weight: 700; margin-top: .25rem; }
+.q-hint { font-size: .9rem; color: var(--muted); margin-top: 1rem; font-weight: 600; }
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+.choice-btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  padding: 1.2rem .5rem;
+  border-radius: 18px;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: all .15s;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+.choice-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.04); }
+.choice-btn:disabled { cursor: default; opacity: .7; }
+.choice-btn.der { background: var(--der); }
+.choice-btn.die { background: var(--die); }
+.choice-btn.das { background: var(--das); color: #0E7490; }
+.choice-btn.correct-flash { animation: correctPulse .5s ease; box-shadow: 0 0 0 6px #22C55E44; }
+.choice-btn.wrong-flash   { animation: wrongShake .4s ease; box-shadow: 0 0 0 6px #EF444444; }
+@keyframes correctPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+@keyframes wrongShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+
+.feedback-msg {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5rem;
+  padding: .75rem;
+  border-radius: 14px;
+  text-align: center;
+  margin-bottom: 1rem;
+  animation: popIn .3s cubic-bezier(.34,1.56,.64,1);
+}
+.feedback-correct { background: #DCFCE7; color: #15803D; }
+.feedback-wrong   { background: #FEE2E2; color: #B91C1C; }
+
+.next-btn {
+  display: block;
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  padding: 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--die), var(--der));
+  color: white;
+  box-shadow: 0 4px 16px rgba(168,85,247,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(168,85,247,.45); }
+
+/* ── PLURAL GAME ── */
+.plural-input-row {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.plural-input {
+  flex: 1;
+  padding: .9rem 1.2rem;
+  border-radius: 14px;
+  border: 2px solid #E5E7EB;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  outline: none;
+  transition: border-color .2s;
+}
+.plural-input:focus { border-color: var(--die); }
+.plural-check-btn {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  padding: .9rem 1.5rem;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #F97316, #FBBF24);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(249,115,22,.3);
+  transition: transform .2s;
+}
+.plural-check-btn:hover { transform: translateY(-2px); }
+
+/* ── COLOUR SORT ── */
+.sort-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.sort-col {
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+.sort-col.der-col { background: linear-gradient(160deg, #FFE0EE, #FFB3D1); }
+.sort-col.die-col { background: linear-gradient(160deg, #F3E8FF, #DDD6FE); }
+.sort-col.das-col { background: linear-gradient(160deg, #CFFAFE, #A5F3FC); }
+.sort-col-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: .8rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px dashed rgba(255,255,255,.6);
+}
+.sort-word {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(255,255,255,.55);
+  border-radius: 12px;
+  padding: .4rem .7rem;
+  margin-bottom: .4rem;
+  font-weight: 800;
+  font-size: .95rem;
+  animation: cardPop .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+.sort-word .sw-emoji { font-size: 1.3rem; }
+.sort-word .sw-text  { flex: 1; }
+.sort-word .sw-eng   { font-size: .75rem; color: #6B7280; font-weight: 600; }
+
+/* ── QUIZ ALL VOCAB ── */
+.quiz-type-filter {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.filter-btn {
+  padding: .35rem .9rem;
+  border-radius: 999px;
+  border: 2px solid #E5E7EB;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: .85rem;
+  cursor: pointer;
+  background: white;
+  transition: all .2s;
+}
+.filter-btn.active { background: var(--text); color: white; border-color: var(--text); }
+
+/* ── RESULTS SCREEN ── */
+.result-screen {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.result-emoji  { font-size: 5rem; display: block; animation: emojiWiggle 1s infinite; }
+.result-score  { font-family: 'Fredoka One', cursive; font-size: 4rem; color: var(--die); }
+.result-msg    { font-size: 1.2rem; color: var(--muted); font-weight: 700; }
+.restart-btn {
+  margin-top: 1.5rem;
+  display: inline-block;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.2rem;
+  padding: .9rem 2.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--der), var(--die));
+  color: white;
+  box-shadow: 0 4px 16px rgba(168,85,247,.3);
+}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap { background: #F3F4F6; border-radius: 999px; height: 10px; margin-bottom: 1rem; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--der), var(--die)); transition: width .4s; }
+
+/* ── ALL VOCAB TABLE ── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .75rem;
+}
+.vocab-chip {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  background: white;
+  border-radius: 14px;
+  padding: .6rem .9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .15s;
+  animation: cardPop .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+.vocab-chip:hover { transform: translateY(-2px); }
+.vc-emoji { font-size: 1.4rem; }
+.vc-de    { font-weight: 800; font-size: .95rem; }
+.vc-en    { font-size: .8rem; color: var(--muted); font-weight: 600; }
+.vc-type  {
+  margin-left: auto;
+  font-size: .65rem;
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.type-noun-der { background: var(--der-light); color: #BE185D; }
+.type-noun-die { background: var(--die-light); color: #7C3AED; }
+.type-noun-das { background: var(--das-light); color: #0E7490; }
+.type-verb     { background: #DCFCE7; color: #15803D; }
+.type-number   { background: #FEF9C3; color: #A16207; }
+.type-country  { background: #E0F2FE; color: #0369A1; }
+.type-language { background: #FEE2E2; color: #B91C1C; }
+.type-phrase   { background: #F0FDF4; color: #166534; }
+.type-adjective{ background: #FFF7ED; color: #C2410C; }
+.type-pronoun  { background: #EFF6FF; color: #1D4ED8; }
+.type-adverb   { background: #FDF4FF; color: #9333EA; }
+.type-word     { background: #F9FAFB; color: #374151; }
+
+/* confetti canvas */
+#confetti { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; }
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="header">
+  <h1>🇩🇪 Deutsch Lernen!</h1>
+  <p>Netzwerk Neu A1 · All 177 words · 4 fun games</p>
+</div>
+
+<nav class="nav">
+  <button class="tab-btn active" data-tab="reference">📖 Nouns</button>
+  <button class="tab-btn" data-tab="gender">🎮 Gender Game</button>
+  <button class="tab-btn" data-tab="plural">🔢 Plural Game</button>
+  <button class="tab-btn" data-tab="sort">🎨 Colour Sort</button>
+  <button class="tab-btn" data-tab="quiz">🧠 All Vocab</button>
+</nav>
+
+<!-- ════ REFERENCE ════ -->
+<section id="reference" class="section active">
+  <div class="section-title">📖 All German Nouns</div>
+  <div class="gender-key">
+    <div class="gender-badge badge-der">🔵 DER = masculine</div>
+    <div class="gender-badge badge-die">🟣 DIE = feminine</div>
+    <div class="gender-badge badge-das">🔷 DAS = neuter</div>
+  </div>
+  <input class="search-bar" id="nounSearch" placeholder="🔍 Search words…" oninput="filterNouns()">
+  <div class="noun-grid" id="nounGrid"></div>
+</section>
+
+<!-- ════ GENDER GAME ════ -->
+<section id="gender" class="section">
+  <div class="section-title">🎮 What's the Article?</div>
+  <div class="game-container">
+    <div class="score-bar">
+      <div class="score-item"><div class="score-label">Correct</div><div class="score-value score-correct" id="gCorrect">0</div></div>
+      <div class="score-item"><div class="score-label">Progress</div><div class="score-value score-progress" id="gProgress">0/0</div></div>
+      <div class="score-item"><div class="score-label">Wrong</div><div class="score-value score-wrong" id="gWrong">0</div></div>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="gBar" style="width:0%"></div></div>
+    <div id="gGame"></div>
+  </div>
+</section>
+
+<!-- ════ PLURAL GAME ════ -->
+<section id="plural" class="section">
+  <div class="section-title">🔢 Make it Plural!</div>
+  <div class="game-container">
+    <div class="score-bar">
+      <div class="score-item"><div class="score-label">Correct</div><div class="score-value score-correct" id="pCorrect">0</div></div>
+      <div class="score-item"><div class="score-label">Progress</div><div class="score-value score-progress" id="pProgress">0/0</div></div>
+      <div class="score-item"><div class="score-label">Wrong</div><div class="score-value score-wrong" id="pWrong">0</div></div>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="pBar" style="width:0%"></div></div>
+    <div id="pGame"></div>
+  </div>
+</section>
+
+<!-- ════ COLOUR SORT ════ -->
+<section id="sort" class="section">
+  <div class="section-title">🎨 Gender Colour Sort</div>
+  <div class="gender-key">
+    <div class="gender-badge badge-der">🔵 DER = PINK</div>
+    <div class="gender-badge badge-die">🟣 DIE = PURPLE</div>
+    <div class="gender-badge badge-das">🔷 DAS = BLUE</div>
+  </div>
+  <div class="sort-columns" id="sortCols"></div>
+</section>
+
+<!-- ════ ALL VOCAB QUIZ ════ -->
+<section id="quiz" class="section">
+  <div class="section-title">🧠 All 177 Words</div>
+  <div class="quiz-type-filter" id="typeFilter"></div>
+  <input class="search-bar" id="vocabSearch" placeholder="🔍 Search all words…" oninput="filterVocab()">
+  <div class="vocab-grid" id="vocabGrid"></div>
+</section>
+
+<script>
+// ══════════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════════
+const NOUNS = [
+  // word, article, plural, english, emoji
+  ["Autobahn","die","Autobahnen","highway","🛣️"],
+  ["Butterbrot","das","Butterbrote","sandwich","🥪"],
+  ["Flasche","die","Flaschen","bottle","🍼"],
+  ["Handtuch","das","Handtücher","towel","🛁"],
+  ["Kindergarten","der","Kindergärten","kindergarten","🏫"],
+  ["Koffer","der","Koffer","suitcase","🧳"],
+  ["Kranke","der","Kranken","sick person","🤒"],
+  ["Nudel","die","Nudeln","noodle","🍝"],
+  ["Würstchen","das","Würstchen","sausage","🌭"],
+  ["Würstel","das","Würstel","sausage (Austrian)","🌭"],
+  ["Sprache","die","Sprachen","language","💬"],
+  ["Wort","das","Wörter","word","📝"],
+  ["Entschuldigung","die","Entschuldigungen","apology / excuse me","🙏"],
+  ["Person","die","Personen","person","👤"],
+  ["Situation","die","Situationen","situation","🎭"],
+  ["Name","der","Namen","name","🏷️"],
+  ["Kursplakat","das","Kursplakate","course poster","📋"],
+  ["Nachname","der","Nachnamen","last name","🪪"],
+  ["Personalpronomen","das","Personalpronomen","personal pronoun","🔤"],
+  ["Verb","das","Verben","verb","📖"],
+  ["Vorname","der","Vornamen","first name","👤"],
+  ["Antwort","die","Antworten","answer","💡"],
+  ["Reiseführer","der","Reiseführer","travel guide (m)","🗺️"],
+  ["Reiseführerin","die","Reiseführerinnen","travel guide (f)","🗺️"],
+  ["Telefon","das","Telefone","telephone","📞"],
+  ["Aussagesatz","der","Aussagesätze","declarative sentence","💬"],
+  ["Interview","das","Interviews","interview","🎤"],
+  ["W-Frage","die","W-Fragen","w-question","❓"],
+  ["Partner","der","Partner","partner (m)","🤝"],
+  ["Partnerin","die","Partnerinnen","partner (f)","🤝"],
+  ["Buchstabe","der","Buchstaben","letter","🔤"],
+  ["Handynummer","die","Handynummern","mobile number","📱"],
+  ["Telefonnummer","die","Telefonnummern","phone number","☎️"],
+  ["Alphabet","das","Alphabete","alphabet","🔡"],
+  ["E-Mail-Adresse","die","E-Mail-Adressen","email address","📧"],
+  ["Gespräch","das","Gespräche","conversation","💭"],
+  ["Punkt","der","Punkte","period / point","⚫"],
+  ["Unterstrich","der","Unterstriche","underscore","➖"],
+  ["Dialog","der","Dialoge","dialogue","🗣️"],
+  ["Zahl","die","Zahlen","number","🔢"],
+  ["Land","das","Länder","country","🌍"],
+  ["Tabelle","die","Tabellen","table / chart","📊"],
+  ["Stadt","die","Städte","city","🏙️"],
+  ["Text","der","Texte","text","📄"],
+  ["Grammatik","die","Grammatiken","grammar","📚"],
+  ["Redemittel","das","Redemittel","useful phrases","💬"],
+  ["Subjekt","das","Subjekte","subject","🔍"],
+  ["W-Wort","das","W-Wörter","w-word","❓"],
+];
+
+const ALL_VOCAB = [
+  // word, type, english, emoji
+  ["Bulgarisch","language","Bulgarian","🇧🇬"],
+  ["Deutsch","language","German","🇩🇪"],
+  ["Englisch","language","English","🇬🇧"],
+  ["Indonesisch","language","Indonesian","🇮🇩"],
+  ["Italienisch","language","Italian","🇮🇹"],
+  ["Japanisch","language","Japanese","🇯🇵"],
+  ["Russisch","language","Russian","🇷🇺"],
+  ["Serbisch","language","Serbian","🇷🇸"],
+  ["Türkisch","language","Turkish","🇹🇷"],
+  ["Ungarisch","language","Hungarian","🇭🇺"],
+  ["Spanisch","language","Spanish","🇪🇸"],
+  ["Französisch","language","French","🇫🇷"],
+  ["Polnisch","language","Polish","🇵🇱"],
+  ["Rätoromanisch","language","Raetho-Romanic","🗣️"],
+  ["Portugiesisch","language","Portugese","🇵🇹"],
+  ["Arabisch","language","Arabic","🇸🇦"],
+  ["Deutschland","country","Germany","🇩🇪"],
+  ["Österreich","country","Austria","🇦🇹"],
+  ["Japan","country","Japan","🇯🇵"],
+  ["Brasilien","country","Brasil","🇧🇷"],
+  ["Algerien","country","Algeria","🇩🇿"],
+  ["Frankreich","country","France","🇫🇷"],
+  ["Griechenland","country","Greece","🇬🇷"],
+  ["Italien","country","Italy","🇮🇹"],
+  ["Mexiko","country","Mexico","🇲🇽"],
+  ["Portugal","country","Portugal","🇵🇹"],
+  ["Thailand","country","Thailand","🇹🇭"],
+  ["Polen","country","Poland","🇵🇱"],
+  ["Russland","country","Russia","🇷🇺"],
+  ["Spanien","country","Spain","🇪🇸"],
+  ["die Schweiz","country","Switzerland","🇨🇭"],
+  ["die Türkei","country","Turkey","🇹🇷"],
+  ["die Ukraine","country","Ukraine","🇺🇦"],
+  ["null","number","zero","0️⃣"],
+  ["eins","number","one","1️⃣"],
+  ["zwei","number","two","2️⃣"],
+  ["drei","number","three","3️⃣"],
+  ["vier","number","four","4️⃣"],
+  ["fünf","number","five","5️⃣"],
+  ["sechs","number","six","6️⃣"],
+  ["sieben","number","seven","7️⃣"],
+  ["acht","number","eight","8️⃣"],
+  ["neun","number","nine","9️⃣"],
+  ["zehn","number","ten","🔟"],
+  ["elf","number","eleven","🔢"],
+  ["zwölf","number","twelve","🔢"],
+  ["dreizehn","number","thirteen","🔢"],
+  ["vierzehn","number","fourteen","🔢"],
+  ["fünfzehn","number","fifteen","🔢"],
+  ["sechzehn","number","sixteen","🔢"],
+  ["siebzehn","number","seventeen","🔢"],
+  ["achtzehn","number","eighteen","🔢"],
+  ["neunzehn","number","nineteen","🔢"],
+  ["zwanzig","number","twenty","🔢"],
+  ["guten Tag","phrase","Good day! / Hello!","👋"],
+  ["hallo","phrase","hello","👋"],
+  ["tschüs","phrase","bye","👋"],
+  ["ciao","phrase","bye (Italian)","👋"],
+  ["bis bald","phrase","see you soon","👋"],
+  ["auf Wiedersehen","phrase","goodbye","👋"],
+  ["gute Nacht","phrase","good night","🌙"],
+  ["guten Abend","phrase","good evening","🌆"],
+  ["guten Morgen","phrase","good morning","🌅"],
+  ["danke","phrase","thank you","🙏"],
+  ["bitte","phrase","please","🙏"],
+  ["heißen","verb","to be called","🏷️"],
+  ["sein","verb","to be","🔵"],
+  ["gehen","verb","to go","🚶"],
+  ["kommen","verb","to come from","🏠"],
+  ["wohnen","verb","to live","🏠"],
+  ["sprechen","verb","to speak","🗣️"],
+  ["lernen","verb","to learn","📚"],
+  ["machen","verb","to make / do","🔨"],
+  ["kennen","verb","to know","💡"],
+  ["hören","verb","to hear","👂"],
+  ["lesen","verb","to read","📖"],
+  ["schreiben","verb","to write","✍️"],
+  ["sagen","verb","to say","💬"],
+  ["spielen","verb","to play","🎮"],
+  ["sammeln","verb","to collect","📦"],
+  ["fragen","verb","to ask","❓"],
+  ["verstehen","verb","to understand","💡"],
+  ["zulordnen","verb","to assign / match","🔗"],
+  ["buchstabieren","verb","to spell","🔤"],
+  ["mitsprechen","verb","to speak along","🗣️"],
+  ["grüßen","verb","to greet","👋"],
+  ["reagieren","verb","to react","⚡"],
+  ["vorstellen","verb","to introduce","🤝"],
+  ["variieren","verb","to vary","🔄"],
+  ["ergänzen","verb","to complete","✏️"],
+  ["notieren","verb","to note","📝"],
+  ["raten","verb","to guess","🤔"],
+  ["gut","adjective","good","👍"],
+  ["international","adjective","international","🌐"],
+  ["formell","adjective","formal","🎩"],
+  ["informell","adjective","informal","😊"],
+  ["laut","adjective","loud","📢"],
+  ["langsam","adjective","slow","🐢"],
+  ["kurz","adjective","short","📏"],
+  ["bekannt","adjective","well-known","⭐"],
+  ["sehr","adverb","very","⭐"],
+  ["auch","adverb","also","➕"],
+  ["nicht","adverb","not","❌"],
+  ["noch einmal","adverb","once more","🔁"],
+  ["zuerst","adverb","at first","1️⃣"],
+  ["ganz","adverb","pretty / quite","✨"],
+  ["dann","adverb","then","➡️"],
+  ["ich","pronoun","I","🙋"],
+  ["du","pronoun","you (informal)","🫵"],
+  ["er","pronoun","he","👦"],
+  ["sie","pronoun","she / they","👧"],
+  ["Sie","pronoun","you (formal)","🫵"],
+  ["wer","pronoun","who","❓"],
+  ["was","pronoun","what","❓"],
+  ["wo","pronoun","where","📍"],
+  ["woher","pronoun","from where","🧭"],
+  ["wie","pronoun","how / what","❔"],
+  ["und","word","and","➕"],
+  ["oder","word","or","🔀"],
+  ["ein / eine","word","a / an","1️⃣"],
+  ["mein / meine","word","my","💙"],
+  ["Herr","word","Mr","👨"],
+  ["Frau","word","Miss / Mrs / Ms","👩"],
+  ["minus","word","minus","➖"],
+  ["in","word","in","📦"],
+  ["aus","word","from","📍"],
+  ["auf","word","on / in","📍"],
+  ["ein bisschen","word","a little","🤏"],
+];
+
+// ══════════════════════════════════════════════════
+//  TABS
+// ══════════════════════════════════════════════════
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    const sec = document.getElementById(btn.dataset.tab);
+    sec.classList.add('active');
+    if (btn.dataset.tab === 'gender' && !gStarted)  initGender();
+    if (btn.dataset.tab === 'plural' && !pStarted)  initPlural();
+    if (btn.dataset.tab === 'sort')                 renderSort();
+    if (btn.dataset.tab === 'quiz')                 renderVocab();
+  });
+});
+
+// ══════════════════════════════════════════════════
+//  REFERENCE – NOUN CARDS
+// ══════════════════════════════════════════════════
+function renderNouns(list) {
+  const grid = document.getElementById('nounGrid');
+  grid.innerHTML = '';
+  list.forEach(([word, art, plural, eng, emoji], i) => {
+    const card = document.createElement('div');
+    card.className = `noun-card ${art}`;
+    card.style.animationDelay = `${i * 0.03}s`;
+    const artClass = `art-${art}`;
+    card.innerHTML = `
+      <span class="noun-emoji">${emoji}</span>
+      <span class="noun-article ${artClass}">${art}</span>
+      <span class="noun-word">${word}</span>
+      <div class="noun-plural">▶ ${plural}</div>
+      <div class="noun-english">${eng}</div>`;
+    grid.appendChild(card);
+  });
+}
+renderNouns(NOUNS);
+
+function filterNouns() {
+  const q = document.getElementById('nounSearch').value.toLowerCase();
+  renderNouns(NOUNS.filter(([w,,, e]) => w.toLowerCase().includes(q) || e.toLowerCase().includes(q)));
+}
+
+// ══════════════════════════════════════════════════
+//  GENDER GAME
+// ══════════════════════════════════════════════════
+let gQueue, gIdx, gCorrect, gWrong, gStarted = false;
+
+function initGender() {
+  gStarted = true;
+  gQueue = shuffle([...NOUNS]);
+  gIdx = gCorrect = gWrong = 0;
+  renderGenderQ();
+}
+
+function renderGenderQ() {
+  const el = document.getElementById('gGame');
+  if (gIdx >= gQueue.length) { showGenderResult(); return; }
+  const [word, art, plural, eng, emoji] = gQueue[gIdx];
+  updateGBar();
+  el.innerHTML = `
+    <div class="question-card">
+      <span class="q-emoji">${emoji}</span>
+      <div class="q-word">${word}</div>
+      <div class="q-english">${eng}</div>
+      <div class="q-hint">Plural: <b>${plural}</b></div>
+    </div>
+    <div class="choices">
+      <button class="choice-btn der" onclick="checkGender('der','${art}',this)">DER</button>
+      <button class="choice-btn die" onclick="checkGender('die','${art}',this)">DIE</button>
+      <button class="choice-btn das" onclick="checkGender('das','${art}',this)">DAS</button>
+    </div>
+    <div id="gFeedback"></div>`;
+}
+
+function checkGender(chosen, correct, btn) {
+  document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+  const fb = document.getElementById('gFeedback');
+  if (chosen === correct) {
+    gCorrect++;
+    btn.classList.add('correct-flash');
+    fb.className = 'feedback-msg feedback-correct';
+    fb.textContent = '✅ Richtig! Correct!';
+    launchConfetti();
+  } else {
+    gWrong++;
+    btn.classList.add('wrong-flash');
+    document.querySelectorAll('.choice-btn').forEach(b => { if (b.textContent.toLowerCase() === correct) b.classList.add('correct-flash'); });
+    fb.className = 'feedback-msg feedback-wrong';
+    fb.textContent = `❌ The answer is: ${correct.toUpperCase()}`;
+  }
+  document.getElementById('gCorrect').textContent  = gCorrect;
+  document.getElementById('gWrong').textContent    = gWrong;
+  document.getElementById('gProgress').textContent = `${gIdx+1}/${gQueue.length}`;
+  fb.innerHTML += `<button class="next-btn" style="margin-top:.75rem" onclick="nextGender()">Next ▶</button>`;
+}
+
+function nextGender() { gIdx++; renderGenderQ(); }
+function updateGBar() {
+  document.getElementById('gBar').style.width = `${(gIdx / gQueue.length) * 100}%`;
+  document.getElementById('gProgress').textContent = `${gIdx}/${gQueue.length}`;
+}
+function showGenderResult() {
+  const pct = Math.round((gCorrect / gQueue.length) * 100);
+  const stars = pct >= 90 ? '🌟🌟🌟' : pct >= 70 ? '⭐⭐' : '💪';
+  document.getElementById('gGame').innerHTML = `
+    <div class="result-screen">
+      <span class="result-emoji">${pct >= 90 ? '🏆' : pct >= 70 ? '😄' : '😅'}</span>
+      <div class="result-score">${pct}%</div>
+      <div style="font-family:'Fredoka One';font-size:1.5rem;color:var(--die)">${stars}</div>
+      <div class="result-msg">${gCorrect} correct · ${gWrong} wrong · ${gQueue.length} total</div>
+      <button class="restart-btn" onclick="initGender()">🔄 Play Again!</button>
+    </div>`;
+  if (pct >= 70) launchConfetti(true);
+}
+
+// ══════════════════════════════════════════════════
+//  PLURAL GAME
+// ══════════════════════════════════════════════════
+let pQueue, pIdx, pCorrect, pWrong, pStarted = false;
+
+function initPlural() {
+  pStarted = true;
+  pQueue = shuffle([...NOUNS]);
+  pIdx = pCorrect = pWrong = 0;
+  renderPluralQ();
+}
+
+function renderPluralQ() {
+  const el = document.getElementById('pGame');
+  if (pIdx >= pQueue.length) { showPluralResult(); return; }
+  const [word, art, plural, eng, emoji] = pQueue[pIdx];
+  updatePBar();
+  const artClass = `art-${art}`;
+  el.innerHTML = `
+    <div class="question-card">
+      <span class="q-emoji">${emoji}</span>
+      <div class="q-word">${word}</div>
+      <div class="q-english">${eng}</div>
+      <div style="margin-top:.5rem">
+        <span class="noun-article ${artClass}" style="font-size:1rem;padding:.2rem .9rem">${art} → die (plural)</span>
+      </div>
+      <div class="q-hint">Type the plural form below 👇</div>
+    </div>
+    <div class="plural-input-row">
+      <input class="plural-input" id="pInput" placeholder="Plural form…" data-correct="${plural}"
+             onkeydown="if(event.key==='Enter')checkPlural('${plural.replace(/'/g,"\\'")}')">
+      <button class="plural-check-btn" onclick="checkPlural('${plural.replace(/'/g,"\\'")}')">Check ✓</button>
+    </div>
+    <div id="pFeedback"></div>`;
+  setTimeout(() => document.getElementById('pInput')?.focus(), 50);
+}
+
+function checkPlural(correct) {
+  const input = document.getElementById('pInput');
+  if (!input) return;
+  const val = input.value.trim().toLowerCase();
+  if (!val) return;
+  input.disabled = true;
+  document.querySelector('.plural-check-btn').disabled = true;
+  const fb = document.getElementById('pFeedback');
+  if (val === correct.toLowerCase()) {
+    pCorrect++;
+    fb.className = 'feedback-msg feedback-correct';
+    fb.textContent = '✅ Richtig! Correct!';
+    launchConfetti();
+  } else {
+    pWrong++;
+    fb.className = 'feedback-msg feedback-wrong';
+    fb.textContent = `❌ Answer: ${correct}`;
+  }
+  document.getElementById('pCorrect').textContent  = pCorrect;
+  document.getElementById('pWrong').textContent    = pWrong;
+  document.getElementById('pProgress').textContent = `${pIdx+1}/${pQueue.length}`;
+  fb.innerHTML += `<button class="next-btn" style="margin-top:.75rem" onclick="nextPlural()">Next ▶</button>`;
+}
+function nextPlural() { pIdx++; renderPluralQ(); }
+function updatePBar() {
+  document.getElementById('pBar').style.width = `${(pIdx / pQueue.length) * 100}%`;
+  document.getElementById('pProgress').textContent = `${pIdx}/${pQueue.length}`;
+}
+function showPluralResult() {
+  const pct = Math.round((pCorrect / pQueue.length) * 100);
+  document.getElementById('pGame').innerHTML = `
+    <div class="result-screen">
+      <span class="result-emoji">${pct >= 90 ? '🏆' : pct >= 70 ? '😄' : '😅'}</span>
+      <div class="result-score">${pct}%</div>
+      <div class="result-msg">${pCorrect} correct · ${pWrong} wrong · ${pQueue.length} total</div>
+      <button class="restart-btn" onclick="initPlural()">🔄 Play Again!</button>
+    </div>`;
+  if (pct >= 70) launchConfetti(true);
+}
+
+// ══════════════════════════════════════════════════
+//  COLOUR SORT
+// ══════════════════════════════════════════════════
+function renderSort() {
+  const cols = document.getElementById('sortCols');
+  if (cols.innerHTML) return;
+  const groups = { der: [], die: [], das: [] };
+  NOUNS.forEach(([w, a,, e, em]) => { if (groups[a]) groups[a].push([w, e, em]); });
+  const config = [
+    ['der', 'der-col', '🔵 DER', '#FF6B9D'],
+    ['die', 'die-col', '🟣 DIE', '#A855F7'],
+    ['das', 'das-col', '🔷 DAS', '#22D3EE'],
+  ];
+  config.forEach(([art, cls, title]) => {
+    const col = document.createElement('div');
+    col.className = `sort-col ${cls}`;
+    col.innerHTML = `<div class="sort-col-title">${title}</div>`;
+    groups[art].forEach(([w, eng, em], i) => {
+      const chip = document.createElement('div');
+      chip.className = 'sort-word';
+      chip.style.animationDelay = `${i * 0.04}s`;
+      chip.innerHTML = `<span class="sw-emoji">${em}</span><span class="sw-text">${w}</span><span class="sw-eng">${eng}</span>`;
+      col.appendChild(chip);
+    });
+    cols.appendChild(col);
+  });
+}
+
+// ══════════════════════════════════════════════════
+//  ALL VOCABULARY
+// ══════════════════════════════════════════════════
+const TYPE_LABELS = {
+  language:'language', country:'country', number:'number', phrase:'phrase',
+  verb:'verb', adjective:'adj', adverb:'adv', pronoun:'pronoun', word:'word'
+};
+let activeType = 'all';
+let allCombined = [];
+
+function buildCombined() {
+  allCombined = [];
+  NOUNS.forEach(([w, art, pl, eng, em]) => allCombined.push([w, `noun-${art}`, eng, em]));
+  ALL_VOCAB.forEach(([w, type, eng, em]) => allCombined.push([w, type, eng, em]));
+}
+buildCombined();
+
+function renderVocab() {
+  // build filter buttons
+  const filterEl = document.getElementById('typeFilter');
+  if (!filterEl.innerHTML) {
+    const types = ['all', 'noun-der', 'noun-die', 'noun-das', 'verb', 'number', 'country', 'language', 'phrase', 'adjective', 'adverb', 'pronoun', 'word'];
+    const labels = { all:'🌟 All', 'noun-der':'🔵 DER', 'noun-die':'🟣 DIE', 'noun-das':'🔷 DAS',
+      verb:'🏃 Verbs', number:'🔢 Numbers', country:'🌍 Countries', language:'🗣️ Languages',
+      phrase:'👋 Phrases', adjective:'✨ Adj', adverb:'⚡ Adv', pronoun:'👤 Pronouns', word:'💬 Words' };
+    types.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn' + (t === 'all' ? ' active' : '');
+      btn.textContent = labels[t];
+      btn.onclick = () => {
+        activeType = t;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterVocab();
+      };
+      filterEl.appendChild(btn);
+    });
+  }
+  filterVocab();
+}
+
+function filterVocab() {
+  const q = (document.getElementById('vocabSearch')?.value || '').toLowerCase();
+  const grid = document.getElementById('vocabGrid');
+  grid.innerHTML = '';
+  const filtered = allCombined.filter(([w, type, eng]) => {
+    const typeMatch = activeType === 'all' || type === activeType;
+    const textMatch = !q || w.toLowerCase().includes(q) || eng.toLowerCase().includes(q);
+    return typeMatch && textMatch;
+  });
+  filtered.forEach(([w, type, eng, em], i) => {
+    const chip = document.createElement('div');
+    chip.className = 'vocab-chip';
+    chip.style.animationDelay = `${i * 0.02}s`;
+    const typeClass = `type-${type.replace('-','_').replace('-','_')}`;
+    const short = type.replace('noun-', '').replace('adjective','adj');
+    chip.innerHTML = `
+      <span class="vc-emoji">${em}</span>
+      <div><div class="vc-de">${w}</div><div class="vc-en">${eng}</div></div>
+      <span class="vc-type ${typeClass}">${short}</span>`;
+    grid.appendChild(chip);
+  });
+}
+
+// ══════════════════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════════════════
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ══════════════════════════════════════════════════
+//  CONFETTI
+// ══════════════════════════════════════════════════
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+let particles = [], animId;
+
+function launchConfetti(big = false) {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const count = big ? 150 : 40;
+  const colors = ['#FF6B9D','#A855F7','#22D3EE','#FBBF24','#22C55E','#F97316'];
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      r: Math.random() * 8 + 4,
+      d: Math.random() * 6 + 2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.random() * 10 - 10,
+      tiltSpeed: Math.random() * 0.1 + 0.05,
+      angle: 0
+    });
+  }
+  if (!animId) animateConfetti();
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.angle += p.tiltSpeed;
+    p.y += p.d;
+    p.x += Math.sin(p.angle) * 2;
+    p.tilt = Math.sin(p.angle) * 12;
+    ctx.beginPath();
+    ctx.fillStyle = p.color;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.tilt * Math.PI / 180);
+    ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
+    ctx.restore();
+  });
+  particles = particles.filter(p => p.y < canvas.height + 20);
+  if (particles.length > 0) { animId = requestAnimationFrame(animateConfetti); }
+  else { animId = null; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+}
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>
