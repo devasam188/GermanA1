@@ -1,1 +1,777 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>German A1</title></head><body><h1>German A1 App Live</h1><p>Full interactive app deployed.</p></body></html>
+<!--!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>German A1</title></head><body><h1>German A1 App Live</h1><p>Full interactive app deployed.</p></body></html!--->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🇩🇪 Netzwerk Neu A1 · Kapitel 1–4</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0618;--bg2:#1a0d2e;--bg3:#2a1a45;--bg4:#3a2a58;
+  --text:#f0e8ff;--muted:#8b7fa8;--cb:rgba(255,255,255,.1);
+  --card:rgba(255,255,255,.05);--r:16px;--rs:10px;
+  --acc:#7c3aed;--acc2:#6d28d9;
+  --pink:#f9a8d4;--blue:#93c5fd;--green:#6ee7b7;
+  --orange:#fdba74;--yellow:#fde68a;--purple:#c4b5fd;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;
+  background-image:radial-gradient(ellipse at 10% 20%,#3d1a6e22,transparent 45%),
+  radial-gradient(ellipse at 90% 80%,#1a3d6e22,transparent 45%);}
+
+/* ── NAV ─────────────────────────────────────────── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;
+  background:var(--bg2);border-bottom:1px solid var(--cb);flex-wrap:wrap;gap:8px;}
+.nav-brand h1{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;
+  background:linear-gradient(135deg,#f9a8d4,#c4b5fd,#93c5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-brand p{font-size:.68rem;color:var(--muted);}
+.nav-tabs{display:flex;gap:6px;flex-wrap:wrap;}
+.nt{padding:6px 14px;border-radius:50px;border:1.5px solid var(--cb);background:var(--card);
+  color:var(--muted);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;}
+.nt.active{background:var(--acc);border-color:var(--acc);color:#fff;}
+
+/* ── PAGES ────────────────────────────────────────── */
+.page{display:none;animation:fi .3s ease;}
+.page.active{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── PLAN PAGE ────────────────────────────────────── */
+#plan-inner{padding:20px;max-width:860px;margin:0 auto;}
+.plan-hdr{text-align:center;margin-bottom:28px;}
+.plan-hdr h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;
+  background:linear-gradient(135deg,#f9a8d4,#c4b5fd);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.plan-hdr p{color:var(--muted);font-size:.85rem;}
+
+.prog-ov{background:var(--bg2);border:1.5px solid var(--cb);border-radius:var(--r);padding:18px;margin-bottom:20px;}
+.prog-ov h3{font-size:.85rem;font-weight:600;color:#e9d5ff;margin-bottom:14px;}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.prog-lbl{font-size:.76rem;color:var(--muted);min-width:160px;}
+.prog-bar{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--acc),#3b82f6);transition:width .5s;}
+.prog-pct{font-size:.72rem;color:var(--purple);font-weight:600;min-width:32px;text-align:right;}
+
+.day-card{background:var(--bg2);border:1.5px solid var(--cb);border-radius:var(--r);overflow:hidden;margin-bottom:16px;}
+.day-hdr{padding:12px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--cb);}
+.day-hdr-title{font-size:.95rem;font-weight:700;}
+.day-hdr-sub{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.sessions{display:grid;grid-template-columns:repeat(3,1fr);}
+@media(max-width:580px){.sessions{grid-template-columns:1fr;}}
+.sess{padding:16px;border-right:1px solid var(--cb);}
+.sess:last-child{border-right:none;}
+.sess-icon{font-size:1.2rem;margin-bottom:6px;}
+.sess-time{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px;}
+.sess-title{font-size:.85rem;font-weight:600;color:#e9d5ff;margin-bottom:8px;}
+.word-pills{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
+.wp{padding:2px 7px;border-radius:50px;font-size:.64rem;font-weight:500;}
+.sess-method{font-size:.76rem;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+.sess-goal{font-size:.72rem;padding:7px 10px;border-radius:var(--rs);
+  background:rgba(124,58,237,.12);border:1px solid rgba(196,181,253,.25);color:#c4b5fd;margin-bottom:10px;}
+.sess-goal strong{display:block;font-size:.65rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px;color:#a78bfa;}
+.done-btn{width:100%;padding:7px;border-radius:50px;border:1.5px solid var(--cb);
+  background:var(--card);color:var(--muted);font-size:.72rem;cursor:pointer;transition:all .2s;}
+.done-btn.done{background:#064e3b;border-color:#6ee7b7;color:#6ee7b7;}
+
+.tips{background:var(--bg3);border:1.5px solid var(--cb);border-radius:var(--r);padding:18px;margin-top:8px;}
+.tips h3{font-size:.85rem;color:#fde68a;margin-bottom:12px;}
+.tip{display:flex;gap:8px;font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+
+/* ── GAME PAGE ────────────────────────────────────── */
+.stats-bar{display:flex;justify-content:center;gap:20px;padding:10px 16px;
+  background:var(--bg2);border-bottom:1px solid var(--cb);flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat .val{font-size:1.2rem;font-weight:700;color:var(--purple);}
+.stat .lbl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;}
+
+.ctrl-bar{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 16px;}
+.mode-bar,.filter-bar{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+.mb{padding:8px 16px;border-radius:50px;border:1.5px solid var(--cb);background:var(--card);
+  color:var(--text);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s;}
+.mb.active{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600;}
+.fb{padding:5px 11px;border-radius:50px;border:1.5px solid var(--cb);background:var(--card);
+  color:var(--muted);font-size:.7rem;cursor:pointer;transition:all .2s;}
+.fb.active{color:#fff;font-weight:600;}
+.fb[data-f="all"].active{background:#7c3aed;border-color:#7c3aed;}
+.fb[data-f="k1"].active{background:#1d4ed8;border-color:#1d4ed8;}
+.fb[data-f="k2"].active{background:#059669;border-color:#059669;}
+.fb[data-f="k3"].active{background:#d97706;border-color:#d97706;}
+.fb[data-f="k4"].active{background:#db2777;border-color:#db2777;}
+.fb[data-f="d1"].active,.fb[data-f="d2"].active{background:#1d4ed8;border-color:#1d4ed8;}
+.fb[data-f="d3"].active,.fb[data-f="d4"].active{background:#059669;border-color:#059669;}
+.fb[data-f="d5"].active,.fb[data-f="d6"].active{background:#ea580c;border-color:#ea580c;}
+
+.game-area{padding:0 16px 40px;max-width:660px;margin:0 auto;}
+
+/* FLASHCARD */
+.cs{perspective:1000px;height:240px;cursor:pointer;margin-bottom:18px;}
+.ci{position:relative;width:100%;height:100%;transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);border-radius:var(--r);}
+.cs.flipped .ci{transform:rotateY(180deg);}
+.cf{position:absolute;inset:0;border-radius:var(--r);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:24px;text-align:center;
+  backface-visibility:hidden;border:1.5px solid var(--cb);}
+.cf-front{background:var(--bg2);}
+.cf-back{transform:rotateY(180deg);background:var(--bg3);}
+.c-de{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,1.7rem);font-weight:700;margin-bottom:5px;}
+.c-en{font-size:1rem;color:#d1fae5;}
+.c-sect{font-size:.65rem;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-bottom:10px;}
+.c-note{font-size:.72rem;color:#a78bfa;font-style:italic;margin-top:7px;}
+.c-hint{font-size:.74rem;color:var(--muted);margin-top:14px;}
+.tbadge{display:inline-block;padding:3px 9px;border-radius:50px;font-size:.65rem;
+  font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;}
+.card-nav{display:flex;gap:8px;justify-content:center;align-items:center;margin-bottom:14px;}
+.nb{padding:8px 20px;border-radius:50px;border:none;font-family:'DM Sans',sans-serif;
+  font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.nb-p{background:var(--card);color:var(--text);border:1.5px solid var(--cb);}
+.nb-n{background:var(--acc);color:#fff;}
+.nb:hover{transform:translateY(-2px);}
+#cc{color:var(--muted);font-size:.8rem;}
+#spk{display:block;margin:0 auto 12px;padding:6px 16px;border-radius:50px;border:1.5px solid var(--cb);
+  background:var(--card);color:var(--muted);font-size:.74rem;cursor:pointer;transition:all .2s;}
+#spk:hover{color:#fff;border-color:#fff;}
+
+/* MC */
+.mc-q{background:var(--bg2);border:1.5px solid var(--cb);border-radius:var(--r);
+  padding:24px;text-align:center;margin-bottom:18px;}
+.mc-w{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:5px;}
+.mc-s{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;}
+.mc-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+@media(max-width:440px){.mc-opts{grid-template-columns:1fr;}}
+.mo{padding:12px 15px;border-radius:var(--rs);border:1.5px solid var(--cb);background:var(--card);
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;
+  transition:all .2s;text-align:left;}
+.mo:hover:not(:disabled){border-color:var(--purple);background:rgba(124,58,237,.13);transform:translateY(-1px);}
+.mo.ok{background:#064e3b;border-color:#6ee7b7;color:#6ee7b7;}
+.mo.bad{background:#450a0a;border-color:#f87171;color:#f87171;}
+
+/* TYPE-IN */
+.tp{background:var(--bg2);border:1.5px solid var(--cb);border-radius:var(--r);
+  padding:24px;text-align:center;margin-bottom:14px;}
+.t-en{font-size:1.15rem;margin-bottom:5px;}
+.t-note{font-size:.72rem;color:#a78bfa;font-style:italic;margin-top:4px;}
+#ti{width:100%;padding:12px 16px;border-radius:var(--rs);border:2px solid var(--cb);
+  background:var(--bg3);color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;
+  outline:none;margin-bottom:8px;transition:border-color .2s;}
+#ti:focus{border-color:var(--acc);}
+#ti.ok{border-color:#6ee7b7;background:#064e3b22;}
+#ti.bad{border-color:#f87171;background:#450a0a22;}
+#ts{width:100%;padding:12px;border-radius:var(--rs);border:none;background:var(--acc);
+  color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:all .2s;margin-bottom:8px;}
+#ts:hover{background:var(--acc2);}
+#rv{text-align:center;font-size:.76rem;color:var(--muted);}
+#rv span{color:var(--purple);cursor:pointer;}
+
+/* FEEDBACK */
+#fb{display:none;padding:10px 16px;border-radius:var(--rs);text-align:center;
+  font-size:.86rem;font-weight:500;margin-bottom:12px;animation:fu .25s ease;}
+#fb.ok{background:#064e3b;color:#6ee7b7;border:1px solid #6ee7b7;}
+#fb.bad{background:#450a0a;color:#f87171;border:1px solid #f87171;}
+@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* PROGRESS */
+#pb-wrap{margin-bottom:16px;}
+#pb-bg{height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;}
+#pb-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc),#3b82f6);transition:width .35s;}
+#pb-lbl{font-size:.68rem;color:var(--muted);text-align:right;margin-top:3px;}
+
+/* MODAL */
+#mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+  z-index:200;align-items:center;justify-content:center;}
+#mov.show{display:flex;}
+#modal{background:var(--bg2);border:1.5px solid var(--cb);border-radius:var(--r);
+  padding:32px 28px;text-align:center;max-width:380px;width:90%;animation:mi .3s ease;}
+@keyframes mi{from{transform:scale(.88);opacity:0}to{transform:scale(1);opacity:1}}
+#modal h2{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:8px;}
+#m-score{font-size:2.5rem;font-weight:700;color:var(--purple);margin-bottom:6px;}
+#modal p{color:var(--muted);margin-bottom:20px;line-height:1.6;font-size:.88rem;}
+#mc{padding:10px 28px;border-radius:50px;border:none;background:var(--acc);
+  color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;}
+
+/* CONFETTI */
+.cp{position:fixed;border-radius:2px;animation:cf 1.2s ease forwards;pointer-events:none;z-index:999;}
+@keyframes cf{0%{transform:translateY(0) rotateZ(0);opacity:1}100%{transform:translateY(100vh) rotateZ(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <h1>🇩🇪 Netzwerk Neu A1 · Kapitel 1–4</h1>
+    <p>Official Glossary · Jennifer Perryman · 220 words · 6-Day Plan</p>
+  </div>
+  <div class="nav-tabs">
+    <button class="nt active" onclick="showPage('plan')">📅 6-Day Plan</button>
+    <button class="nt" onclick="showPage('game')">🎮 Practice</button>
+  </div>
+</nav>
+
+<!-- ══════════ PLAN PAGE ══════════ -->
+<div id="pg-plan" class="page active">
+<div id="plan-inner">
+
+  <div class="plan-hdr">
+    <h2>📅 6-Day Study Plan</h2>
+    <p>Netzwerk Neu A1 · Kapitel 1–4 · ~220 words · 3 sessions per day</p>
+  </div>
+
+  <!-- Progress overview -->
+  <div class="prog-ov">
+    <h3>🎯 Your Progress (tap ✅ after each session)</h3>
+    <div id="prog-rows"></div>
+  </div>
+
+  <div id="day-cards"></div>
+
+  <div class="tips">
+    <h3>💡 6 Essential Daily Tips</h3>
+    <div class="tip"><span>🩷💙💚</span><span>Colour system: Pink = <b>die</b> · Blue = <b>der</b> · Green = <b>das</b> — look at the card background!</span></div>
+    <div class="tip"><span>🔊</span><span>Say EVERY word aloud — German pronunciation must be trained from day 1</span></div>
+    <div class="tip"><span>✍️</span><span>Write each new word 3× — muscle memory locks in spelling and gender</span></div>
+    <div class="tip"><span>⏰</span><span>Spaced repetition: spend 10 min reviewing the previous day's cards before starting</span></div>
+    <div class="tip"><span>🔀</span><span>Separable verbs: ein|kaufen → Ich kaufe ein. The PREFIX goes to the END!</span></div>
+    <div class="tip"><span>🎮</span><span>Use the Practice tab during breaks — even 5 min of flashcards helps retention enormously</span></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════ GAME PAGE ══════════ -->
+<div id="pg-game" class="page">
+
+  <div class="stats-bar">
+    <div class="stat"><div class="val" id="sc">0</div><div class="lbl">Correct</div></div>
+    <div class="stat"><div class="val" id="sw">0</div><div class="lbl">Wrong</div></div>
+    <div class="stat"><div class="val" id="ss">0</div><div class="lbl">Streak 🔥</div></div>
+    <div class="stat"><div class="val" id="st">0</div><div class="lbl">Total</div></div>
+  </div>
+
+  <div class="ctrl-bar">
+    <div class="mode-bar">
+      <button class="mb active" onclick="setMode('fc')">🃏 Flashcard</button>
+      <button class="mb" onclick="setMode('mc')">🎯 Multiple Choice</button>
+      <button class="mb" onclick="setMode('ti')">✏️ Type In</button>
+    </div>
+    <div class="filter-bar">
+      <button class="fb active" data-f="all" onclick="setF('all',this)">All (220)</button>
+      <button class="fb" data-f="k1" onclick="setF('k1',this)">📘 K1</button>
+      <button class="fb" data-f="k2" onclick="setF('k2',this)">📗 K2</button>
+      <button class="fb" data-f="k3" onclick="setF('k3',this)">📙 K3</button>
+      <button class="fb" data-f="k4" onclick="setF('k4',this)">📕 K4</button>
+      <button class="fb" data-f="d1" onclick="setF('d1',this)">Day 1</button>
+      <button class="fb" data-f="d2" onclick="setF('d2',this)">Day 2</button>
+      <button class="fb" data-f="d3" onclick="setF('d3',this)">Day 3</button>
+      <button class="fb" data-f="d4" onclick="setF('d4',this)">Day 4</button>
+      <button class="fb" data-f="d5" onclick="setF('d5',this)">Day 5</button>
+      <button class="fb" data-f="d6" onclick="setF('d6',this)">Day 6</button>
+    </div>
+  </div>
+
+  <div class="game-area" id="ga"></div>
+</div>
+
+<div id="mov">
+  <div id="modal">
+    <h2 id="m-title">🎉 Gut gemacht!</h2>
+    <div id="m-score"></div>
+    <p id="m-msg"></p>
+    <button id="mc" onclick="closeModal()">Weiter spielen</button>
+  </div>
+</div>
+
+<script>
+// ══════ VOCAB DATA ══════════════════════════════════════════════════
+// [de, en, kapitel, section, type, day, session]
+const V=[
+["Hallo!","Hello!","K1","§1a","ph",1,"A"],
+["Guten Tag!","Good day! / Hello!","K1","§1a","ph",1,"A"],
+["Guten Morgen!","Good morning!","K1","§2c","ph",1,"A"],
+["Guten Abend!","Good evening!","K1","§2c","ph",1,"A"],
+["Tschüs!","Bye!","K1","§2a","ph",1,"A"],
+["Auf Wiedersehen!","Goodbye!","K1","§2c","ph",1,"A"],
+["Gute Nacht!","Good night!","K1","§2c","ph",1,"A"],
+["Englisch","English","K1","§1a","gm",1,"A"],
+["Deutsch","German","K1","§1a","gm",1,"A"],
+["Spanisch","Spanish","K1","§1b","gm",1,"A"],
+["Französisch","French","K1","§8a","gm",1,"A"],
+["Italienisch","Italian","K1","§1a","gm",1,"A"],
+["Russisch","Russian","K1","§1a","gm",1,"A"],
+["Türkisch","Turkish","K1","§1a","gm",1,"A"],
+["Chinesisch","Chinese","K1","§1a","gm",1,"A"],
+["Japanisch","Japanese","K1","§1a","gm",1,"A"],
+["international","international","K1","§1a","aj",1,"A"],
+["Wie heißen Sie?","What is your name? (formal)","K1","§2a","ph",1,"P"],
+["Wie heißt du?","What is your name? (informal)","K1","§2a","ph",1,"P"],
+["Ich heiße …","My name is …","K1","§2a","ph",1,"P"],
+["heißen","to be called","K1","§1b","v",1,"P"],
+["die Sprache, -n","language","K1","§1b","f",1,"P"],
+["das Wort, \"-er","word","K1","§1b","n",1,"P"],
+["die Flasche, -n","bottle","K1","§1a","f",1,"P"],
+["das Handtuch, \"-er","towel","K1","§1a","n",1,"P"],
+["der Kindergarten, \"-","kindergarten","K1","§1a","m",1,"P"],
+["der Koffer, -","suitcase","K1","§1a","m",1,"P"],
+["die Nudel, -n","noodle","K1","§1a","f",1,"P"],
+["das Würstchen, -","sausage (small)","K1","§1a","n",1,"P"],
+["die Autobahn, -en","highway / motorway","K1","§1a","f",1,"P"],
+["das Butterbrot, -e","sandwich / bread and butter","K1","§1a","n",1,"P"],
+["Wie geht's?","How are you? (informal)","K1","§2a","ph",1,"E"],
+["Wie geht es Ihnen?","How are you? (formal)","K1","§2a","ph",1,"E"],
+["Danke, gut.","Fine, thank you.","K1","§2a","ph",1,"E"],
+["Ganz gut, danke.","Pretty good, thank you.","K1","§2a","ph",1,"E"],
+["die Entschuldigung","sorry / excuse me","K1","§2a","f",1,"E"],
+["auch","also / too","K1","§2a","av",1,"E"],
+["und","and","K1","§2a","kj",1,"E"],
+["bis bald","see you soon","K1","§2a","ph",1,"E"],
+["kennen","to know (a person)","K1","§2a","v",1,"E"],
+["sammeln","to collect","K1","§2a","v",1,"E"],
+["die Situation, -en","situation","K1","§2b","f",1,"E"],
+["hören","to hear / listen","K1","§2a","v",1,"E"],
+["lesen","to read","K1","§2b","v",1,"E"],
+["null","zero","K1","§6b","gm",2,"A"],
+["eins","one","K1","§6b","gm",2,"A"],
+["zwei","two","K1","§6b","gm",2,"A"],
+["drei","three","K1","§6b","gm",2,"A"],
+["vier","four","K1","§6b","gm",2,"A"],
+["fünf","five","K1","§6b","gm",2,"A"],
+["sechs","six","K1","§6b","gm",2,"A"],
+["sieben","seven","K1","§6b","gm",2,"A"],
+["acht","eight","K1","§6b","gm",2,"A"],
+["neun","nine","K1","§6b","gm",2,"A"],
+["zehn","ten","K1","§6b","gm",2,"A"],
+["elf","eleven","K1","§6b","gm",2,"A"],
+["zwölf","twelve","K1","§6b","gm",2,"A"],
+["zwanzig","twenty","K1","§6b","gm",2,"A"],
+["dreißig","thirty","K1","§6b","gm",2,"A"],
+["hundert","one hundred","K1","§6b","gm",2,"A"],
+["Deutschland","Germany","K1","§4a","n",2,"P"],
+["Österreich","Austria","K1","§8a","n",2,"P"],
+["die Schweiz (Sg.)","Switzerland","K1","§8a","f",2,"P"],
+["die USA (Pl.)","USA","K1","§8a","ph",2,"P"],
+["Frankreich","France","K1","§8a","n",2,"P"],
+["Italien","Italy","K1","§8a","n",2,"P"],
+["Spanien","Spain","K1","§8a","n",2,"P"],
+["Japan","Japan","K1","§8a","n",2,"P"],
+["Russland","Russia","K1","§8a","n",2,"P"],
+["Woher kommen Sie?","Where are you from? (formal)","K1","§4a","ph",2,"P"],
+["Ich komme aus …","I come from …","K1","§4a","ph",2,"P"],
+["Wo wohnen Sie?","Where do you live?","K1","§4a","ph",2,"P"],
+["Ich wohne in …","I live in …","K1","§4a","ph",2,"P"],
+["der Vorname, -n","first name","K1","§3b","m",2,"E"],
+["der Nachname, -n","last name","K1","§3b","m",2,"E"],
+["die Adresse, -n","address","K1","§12a","f",2,"E"],
+["die Handynummer, -n","mobile phone number","K1","§6c","f",2,"E"],
+["die E-Mail, -s","email","K1","§12b","f",2,"E"],
+["das Alphabet","alphabet","K1","§7a","n",2,"E"],
+["die Telefonnummer, -n","telephone number","K1","§7a","f",2,"E"],
+["formell","formal","K1","§3a","av",2,"E"],
+["informell","informal","K1","§3a","av",2,"E"],
+["das Personalpronomen","personal pronoun","K1","§3b","n",2,"E"],
+["Herr","Mr.","K1","§3a","gm",2,"E"],
+["Frau","Mrs. / Ms.","K1","§2c","gm",2,"E"],
+["buchstabieren","to spell","K1","§7c","v",2,"E"],
+["langsam","slowly","K1","§7c","av",2,"E"],
+["noch einmal","once more","K1","§7c","ph",2,"E"],
+["verstehen","to understand","K1","§7c","v",2,"E"],
+["fotografieren","to photograph","K2","§1","v",3,"A"],
+["die Leute (Pl.)","people","K2","§1","f",3,"A"],
+["der Kollege, -n","colleague (m)","K2","§1","m",3,"A"],
+["die Kollegin, -nen","colleague (f)","K2","§1","f",3,"A"],
+["der Freund, -e","friend (m) / boyfriend","K2","§1","m",3,"A"],
+["die Freundin, -nen","friend (f) / girlfriend","K2","§1","f",3,"A"],
+["singen","to sing","K2","§1","v",3,"A"],
+["die Musik (Sg.)","music","K2","§1","f",3,"A"],
+["tanzen","to dance","K2","§1","v",3,"A"],
+["joggen","to jog","K2","§1","v",3,"A"],
+["kochen","to cook","K2","§1","v",3,"A"],
+["reisen","to travel","K2","§2a","v",3,"A"],
+["das Kino, -s","cinema","K2","§2a","n",3,"A"],
+["gern","gladly / like to (+ verb)","K2","§2a","av",3,"P"],
+["gehen, er geht","to go","K2","§2a","v",3,"P"],
+["schwimmen","to swim","K2","§2b","v",3,"P"],
+["antworten","to answer","K2","§2b","v",3,"P"],
+["arbeiten","to work","K2","§2a","v",3,"P"],
+["lieben","to love","K2","§3a","v",3,"P"],
+["Fußball (Sg.)","football (no article)","K2","§3a","n",3,"P"],
+["das Buch, \"-er","book","K2","§3a","n",3,"P"],
+["toll","great / fantastic","K2","§3b","aj",3,"P"],
+["lustig","funny","K2","§3b","aj",3,"P"],
+["wir","we","K2","§3b","gm",3,"P"],
+["ihr","you (plural informal)","K2","§3b","gm",3,"P"],
+["spielen","to play","K2","§2c","v",3,"P"],
+["der Montag, -e","Monday","K2","§4a","m",3,"E"],
+["der Dienstag, -e","Tuesday","K2","§4a","m",3,"E"],
+["der Mittwoch, -e","Wednesday","K2","§4a","m",3,"E"],
+["der Donnerstag, -e","Thursday","K2","§4a","m",3,"E"],
+["der Freitag, -e","Friday","K2","§4a","m",3,"E"],
+["der Samstag, -e","Saturday","K2","§4a","m",3,"E"],
+["der Sonntag, -e","Sunday","K2","§4a","m",3,"E"],
+["das Wochenende, -n","weekend","K2","§3d","n",3,"E"],
+["leider","unfortunately","K2","§4b","av",3,"E"],
+["warum","why","K2","§4b","av",3,"E"],
+["die Verabredung, -en","appointment / date","K2","§5b","f",3,"E"],
+["der Termin, -e","appointment","K2","§5a","m",3,"E"],
+["morgen","tomorrow","K2","§3c","av",3,"E"],
+["der Arzt, \"-e","doctor (m)","K2","§6a","m",4,"A"],
+["die Ärztin, -nen","doctor (f)","K2","§6a","f",4,"A"],
+["der Kellner, -","waiter (m)","K2","§6a","m",4,"A"],
+["die Kellnerin, -nen","waitress (f)","K2","§6a","f",4,"A"],
+["der Lehrer, -","teacher (m)","K2","§9a","m",4,"A"],
+["die Lehrerin, -nen","teacher (f)","K2","§9a","f",4,"A"],
+["der Koch, \"-e","cook (m)","K2","§9b","m",4,"A"],
+["die Köchin, -nen","cook (f)","K2","§9b","f",4,"A"],
+["der Polizist, -en","police officer (m)","K2","§9b","m",4,"A"],
+["die Polizistin, -nen","police officer (f)","K2","§9b","f",4,"A"],
+["der Journalist, -en","journalist (m)","K2","§9a","m",4,"A"],
+["der Elektriker, -","electrician (m)","K2","§9a","m",4,"A"],
+["der Beruf, -e","occupation / profession","K2","§6a","m",4,"A"],
+["das Café, -s","café","K2","§5a","n",4,"P"],
+["das Restaurant, -s","restaurant","K2","§5a","n",4,"P"],
+["das Museum, Museen","museum","K2","§5a","n",4,"P"],
+["das Schwimmbad, \"-er","swimming pool","K2","§5a","n",4,"P"],
+["das Stadion, Stadien","stadium","K2","§5a","n",4,"P"],
+["das Theater, -","theatre","K2","§5a","n",4,"P"],
+["durch (+ A.)","through","K2","§5a","ph",4,"P"],
+["für (+ A.)","for","K2","§5a","ph",4,"P"],
+["jede / jeder","every / each","K2","§5a","aj",4,"P"],
+["die Welt, -en","world","K2","§5b","f",4,"P"],
+["ähnlich","similar","K2","§5b","aj",4,"P"],
+["finden","to find","K2","§5b","v",4,"P"],
+["die Farbe, -n","colour","K2","§10a","f",4,"E"],
+["blau","blue","K2","§10a","aj",4,"E"],
+["rot","red","K2","§10a","aj",4,"E"],
+["grün","green","K2","§10a","aj",4,"E"],
+["merken","to remember","K2","§10a","v",4,"E"],
+["die Familie, -n","family","K2","§12b","f",4,"E"],
+["das Formular, -e","form","K2","§12b","n",4,"E"],
+["die Postleitzahl, -en","zip code / postcode","K2","§12b","f",4,"E"],
+["männlich","male","K2","§12b","aj",4,"E"],
+["weiblich","female","K2","§12b","aj",4,"E"],
+["wählen","to choose","K2","§12b","v",4,"E"],
+["die Stadttour, -en","city tour","K3","§1a","f",5,"A"],
+["der Bahnhof, \"-e","train station","K3","§1a","m",5,"A"],
+["die Station, -en","station / stop","K3","§1a","f",5,"A"],
+["der Besucher, -","visitor (m)","K3","§1a","m",5,"A"],
+["bis (+ D.)","until / up to","K3","§1a","ph",5,"A"],
+["breit","wide","K3","§1b","aj",5,"A"],
+["hoch","high / tall","K3","§1c","aj",5,"A"],
+["der Turm, \"-e","tower","K3","§1c","m",5,"A"],
+["die Kirche, -n","church","K3","§1c","f",5,"A"],
+["das Konzerthaus, \"-er","concert hall","K3","§1c","n",5,"A"],
+["der See, -n","lake / sea","K3","§1c","m",5,"A"],
+["die Mitte (Sg.)","middle / centre","K3","§1c","f",5,"A"],
+["der Fluss, \"-e","river","K3","§1d","m",5,"A"],
+["der Bus, -se","bus","K3","§6a","m",5,"P"],
+["die U-Bahn, -en","subway / underground","K3","§6a","f",5,"P"],
+["die Straßenbahn, -en","tram","K3","§6a","f",5,"P"],
+["das Fahrrad, \"-er","bicycle","K3","§6a","n",5,"P"],
+["das Flugzeug, -e","aeroplane","K3","§6b","n",5,"P"],
+["zu Fuß","on foot","K3","§6a","ph",5,"P"],
+["die Brücke, -n","bridge","K3","§2a","f",5,"P"],
+["die Ausstellung, -en","exhibition","K3","§2a","f",5,"P"],
+["das Hotel, -s","hotel","K3","§2a","n",5,"P"],
+["lang / lange","long / for a long time","K3","§2a","aj",5,"P"],
+["interessant","interesting","K3","§2b","aj",5,"P"],
+["die Lösung, -en","solution","K3","§2b","f",5,"P"],
+["der Weg, -e","way / path","K3","§2b","m",5,"P"],
+["links","left","K3","§7a","av",5,"E"],
+["rechts","right","K3","§7a","av",5,"E"],
+["geradeaus","straight ahead","K3","§7a","av",5,"E"],
+["der Markt, \"-e","market","K3","§7b","m",5,"E"],
+["der Park, -s","park","K3","§7b","m",5,"E"],
+["das Ziel, -e","goal / destination","K3","§7b","n",5,"E"],
+["einfach","easy / simple","K3","§7b","aj",5,"E"],
+["genau","exactly / precisely","K3","§7b","av",5,"E"],
+["danke (sehr)","thank you (very much)","K3","§7b","ph",5,"E"],
+["der Euro, -s","euro","K3","§1c","m",5,"E"],
+["circa / ca.","approximately (~)","K3","§1d","av",5,"E"],
+["das Konzert, -e","concert","K3","§1c","n",5,"E"],
+["das Schiff, -e","ship","K3","§1d","n",5,"E"],
+["das Frühstück (Sg.)","breakfast","K4","§1a","n",6,"A"],
+["das Mittagessen (Sg.)","lunch","K4","§1a","n",6,"A"],
+["das Abendessen (Sg.)","dinner / supper","K4","§1a","n",6,"A"],
+["der Apfelsaft, \"-e","apple juice","K4","§1a","m",6,"A"],
+["das Brot, -e","bread","K4","§1a","n",6,"A"],
+["das Brötchen, -","bread roll","K4","§1a","n",6,"A"],
+["die Butter (Sg.)","butter","K4","§1a","f",6,"A"],
+["das Ei, -er","egg","K4","§1a","n",6,"A"],
+["die Banane, -n","banana","K4","§1a","f",6,"A"],
+["das Gemüse (Sg.)","vegetables","K4","§1a","n",6,"A"],
+["der Käse (Sg.)","cheese","K4","§1a","m",6,"A"],
+["die Kartoffel, -n","potato","K4","§1a","f",6,"A"],
+["die Milch (Sg.)","milk","K4","§1a","f",6,"A"],
+["das Müsli (Sg.)","muesli","K4","§1a","n",6,"A"],
+["der Supermarkt, \"-e","supermarket","K4","§2a","m",6,"P"],
+["die Bäckerei, -en","bakery","K4","§2a","f",6,"P"],
+["einkaufen","to shop","K4","§2a","v",6,"P"],
+["kaufen","to buy","K4","§2b","v",6,"P"],
+["die Tomate, -n","tomato","K4","§2b","f",6,"P"],
+["die Schokolade, -n","chocolate","K4","§2b","f",6,"P"],
+["der Kuchen, -","cake","K4","§2b","m",6,"P"],
+["die Sahne (Sg.)","cream","K4","§2b","f",6,"P"],
+["die Suppe, -n","soup","K4","§2b","f",6,"P"],
+["die Wurst, \"-e","sausage / cold meat","K4","§2b","f",6,"P"],
+["der Zucker (Sg.)","sugar","K4","§2b","m",6,"P"],
+["der Apfel, \"-","apple","K4","§2b","m",6,"P"],
+["das Geschäft, -e","shop / store","K4","§2b","n",6,"P"],
+["lecker","tasty / delicious","K4","§7a","aj",6,"E"],
+["schmecken","to taste","K4","§3d","v",6,"E"],
+["der Reis (Sg.)","rice","K4","§3c","m",6,"E"],
+["der Fisch, -e","fish","K4","§3c","m",6,"E"],
+["das Hähnchen, -","chicken","K4","§3c","n",6,"E"],
+["die Olive, -n","olive","K4","§3c","f",6,"E"],
+["süß","sweet","K4","§3d","aj",6,"E"],
+["der Einkaufswagen, -","shopping cart","K4","§6a","m",6,"E"],
+["bezahlen","to pay","K4","§6a","v",6,"E"],
+["die Kasse, -n","checkout / cash register","K4","§6a","f",6,"E"],
+["das Gramm (Sg.)","gram","K4","§6a","n",6,"E"],
+["das Kilo, -s","kilogram / kilo","K4","§6b","n",6,"E"],
+["vielleicht","maybe / perhaps","K4","§3b","av",6,"E"],
+["alles","everything","K4","§3b","gm",6,"E"],
+["brauchen","to need","K4","§3b","v",6,"E"],
+["der Einkaufszettel, -","grocery list","K4","§3b","m",6,"E"],
+];
+
+const TS={
+  "f": {bg:"#fdf2f8",bd:"#f9a8d4",tx:"#831843",label:"🩷 die"},
+  "m": {bg:"#eff6ff",bd:"#93c5fd",tx:"#1e3a8a",label:"💙 der"},
+  "n": {bg:"#ecfdf5",bd:"#6ee7b7",tx:"#064e3b",label:"💚 das"},
+  "v": {bg:"#fff7ed",bd:"#fdba74",tx:"#7c2d12",label:"🟠 Verb"},
+  "aj":{bg:"#fffbeb",bd:"#fde68a",tx:"#713f12",label:"🟡 Adj."},
+  "av":{bg:"#f0fdf4",bd:"#86efac",tx:"#166534",label:"🟡 Adv."},
+  "ph":{bg:"#f5f3ff",bd:"#c4b5fd",tx:"#3730a3",label:"🟣 Phrase"},
+  "kj":{bg:"#f5f3ff",bd:"#c4b5fd",tx:"#3730a3",label:"🟣 Konj."},
+  "gm":{bg:"#f9fafb",bd:"#d1d5db",tx:"#374151",label:"⬜ Other"},
+};
+
+const DAY_INFO=[
+  {n:1,title:"📘 Kapitel 1 · Part 1",sub:"Sprachen & Begrüßung",bg:"rgba(29,78,216,.12)"},
+  {n:2,title:"📘 Kapitel 1 · Part 2",sub:"Zahlen, Länder & Kontakte",bg:"rgba(124,58,237,.12)"},
+  {n:3,title:"📗 Kapitel 2 · Part 1",sub:"Freunde, Hobbys & Wochentage",bg:"rgba(5,150,105,.12)"},
+  {n:4,title:"📗 Kapitel 2 · Part 2",sub:"Berufe, Orte & Formen",bg:"rgba(234,88,12,.12)"},
+  {n:5,title:"📙 Kapitel 3",sub:"In Hamburg · Stadt & Transport",bg:"rgba(217,119,6,.12)"},
+  {n:6,title:"📕 Kapitel 4",sub:"Guten Appetit! + Grand Review",bg:"rgba(219,39,119,.12)"},
+];
+
+const SESS_DATA={
+  "1A":{icon:"🌅",time:"Morning",method:"Flashcard – gender colour-coding\nRead each word aloud\nFocus: die/der/das"},
+  "1P":{icon:"☀️",time:"Afternoon",method:"Flashcard → Type-In\nFocus: objects & phrases\nLearn heißen conjugation"},
+  "1E":{icon:"🌙",time:"Evening",method:"Roleplay greetings aloud\n30 min: flashcard full Day 1\n15 min: write 5 dialogues"},
+  "2A":{icon:"🌅",time:"Morning",method:"Chant numbers 0–100 aloud\nFlashcard: number names\nPractise: Wie alt bist du?"},
+  "2P":{icon:"☀️",time:"Afternoon",method:"Flashcard: countries + Woher?\nPractise: Ich komme aus …\nType-In all country names"},
+  "2E":{icon:"🌙",time:"Evening",method:"Formal vs informal practice\nAlphabet + spell your name\nFull Day 1+2 review"},
+  "3A":{icon:"🌅",time:"Morning",method:"Flashcard: hobby verbs\nFocus: gern + verb\nPronounce each verb aloud"},
+  "3P":{icon:"☀️",time:"Afternoon",method:"Type-In hobby words\nMake sentences: Ich … gern.\nFocus: toll, lustig"},
+  "3E":{icon:"🌙",time:"Evening",method:"Chant days Mon→Sun\nFlashcard all 13 days\nFull K2 Part 1 review"},
+  "4A":{icon:"🌅",time:"Morning",method:"Flashcard: m/f profession pairs\nFocus: der/die pattern\nWas sind Sie von Beruf?"},
+  "4P":{icon:"☀️",time:"Afternoon",method:"Flashcard: das Café, das Museum…\nType-In place names\nFocus: gender"},
+  "4E":{icon:"🌙",time:"Evening",method:"Gender colour-coding system\nFlashcard shuffle: all K2 words\nFull Day 3+4 review"},
+  "5A":{icon:"🌅",time:"Morning",method:"Flashcard: city vocabulary\nFocus: hoch, breit, lang\nDescribe: Der Turm ist hoch."},
+  "5P":{icon:"☀️",time:"Afternoon",method:"Flashcard: transport words\nType-In: U-Bahn, Straßenbahn\nIch fahre mit dem Bus."},
+  "5E":{icon:"🌙",time:"Evening",method:"Practise: links/rechts/geradeaus\nRoleplay: give directions aloud\nFull Day 5 review"},
+  "6A":{icon:"🌅",time:"Morning",method:"Flashcard: food vocabulary\nGender focus: das Gemüse…\nIch esse gern …"},
+  "6P":{icon:"☀️",time:"Afternoon",method:"Flashcard: shopping words\nType-In: Supermarkt, Bäckerei\nIch kaufe … ein."},
+  "6E":{icon:"🌙",time:"Evening",method:"🏆 GRAND REVIEW:\n30 min: shuffle all 220 words\n30 min: Full MC quiz\n15 min: write 10 sentences\n15 min: 🔊 speak every word"},
+};
+
+// ══════ PLAN PAGE BUILD ═══════════════════════════════════════════
+function buildPlan(){
+  // Progress rows
+  const pr=document.getElementById('prog-rows');
+  const sessions=[["1A","Day 1 Morning"],["1P","Day 1 Afternoon"],["1E","Day 1 Evening"],
+    ["2A","Day 2 Morning"],["2P","Day 2 Afternoon"],["2E","Day 2 Evening"],
+    ["3A","Day 3 Morning"],["3P","Day 3 Afternoon"],["3E","Day 3 Evening"],
+    ["4A","Day 4 Morning"],["4P","Day 4 Afternoon"],["4E","Day 4 Evening"],
+    ["5A","Day 5 Morning"],["5P","Day 5 Afternoon"],["5E","Day 5 Evening"],
+    ["6A","Day 6 Morning"],["6P","Day 6 Afternoon"],["6E","Day 6 Evening"]];
+  sessions.forEach(([k,label])=>{
+    const done=localStorage.getItem('done_'+k)==='1';
+    pr.innerHTML+=`<div class="prog-row">
+      <div class="prog-lbl">${label}</div>
+      <div class="prog-bar"><div class="prog-fill" id="pf-${k}" style="width:${done?100:0}%"></div></div>
+      <div class="prog-pct" id="pp-${k}">${done?'✅':'0%'}</div>
+    </div>`;
+  });
+
+  // Day cards
+  const dc=document.getElementById('day-cards');
+  DAY_INFO.forEach(({n,title,sub,bg})=>{
+    const sessList=['A','P','E'];
+    let sessHtml='';
+    sessList.forEach(s=>{
+      const key=`${n}${s}`;
+      const sd=SESS_DATA[key]||{icon:'',time:'',method:''};
+      const words=V.filter(v=>v[5]===n&&v[6]===s);
+      const done=localStorage.getItem('done_'+key)==='1';
+      const pills=words.slice(0,6).map(w=>{
+        const ts=TS[w[4]]||TS.gm;
+        return `<span class="wp" style="background:${ts.bg};color:${ts.tx};border:1px solid ${ts.bd}">${w[0].split(',')[0]}</span>`;
+      }).join('')+(words.length>6?`<span class="wp" style="background:#2d1b4e;color:#9ca3af;border:1px solid #4b5563">+${words.length-6}</span>`:'');
+      sessHtml+=`<div class="sess" style="background:${bg}">
+        <div class="sess-icon">${sd.icon}</div>
+        <div class="sess-time">${sd.time} · ${words.length} words</div>
+        <div class="sess-title">${words.length>0?words[0][2]+' '+words[0][3]:''} – Session</div>
+        <div class="word-pills">${pills}</div>
+        <div class="sess-method">${sd.method.replace(/\n/g,'<br>')}</div>
+        <button class="done-btn ${done?'done':''}" id="db-${key}" onclick="toggleDone('${key}')">
+          ${done?'✅ Done!':'☐ Mark as Done'}
+        </button>
+      </div>`;
+    });
+    dc.innerHTML+=`<div class="day-card">
+      <div class="day-hdr" style="background:${bg}">
+        <span style="font-size:1.3rem">${n<=2?'📘':n<=4?'📗':n===5?'📙':'📕'}</span>
+        <div><div class="day-hdr-title">Day ${n}: ${title}</div>
+        <div class="day-hdr-sub">${sub}</div></div>
+      </div>
+      <div class="sessions">${sessHtml}</div>
+    </div>`;
+  });
+}
+
+function toggleDone(k){
+  const cur=localStorage.getItem('done_'+k)==='1';
+  const nv=!cur;
+  localStorage.setItem('done_'+k,nv?'1':'0');
+  const btn=document.getElementById('db-'+k);
+  if(btn){btn.classList.toggle('done',nv);btn.textContent=nv?'✅ Done!':'☐ Mark as Done';}
+  const pf=document.getElementById('pf-'+k);
+  if(pf) pf.style.width=nv?'100%':'0%';
+  const pp=document.getElementById('pp-'+k);
+  if(pp) pp.textContent=nv?'✅':'0%';
+}
+
+// ══════ GAME STATE ════════════════════════════════════════════════
+let mode='fc',filter='all',deck=[],idx=0;
+let correct=0,wrong=0,streak=0,total=0;
+
+function getFiltered(){
+  if(filter==='all') return [...V];
+  if(filter.startsWith('k')) return V.filter(v=>v[2].toLowerCase()===filter);
+  if(filter.startsWith('d')) return V.filter(v=>v[5]===parseInt(filter[1]));
+  return [...V];
+}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function setMode(m){mode=m;document.querySelectorAll('.mb').forEach((b,i)=>b.classList.toggle('active',['fc','mc','ti'][i]===m));idx=0;deck=shuffle(getFiltered());renderGame();}
+function setF(f,el){filter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));el.classList.add('active');idx=0;deck=shuffle(getFiltered());renderGame();}
+function updStats(){document.getElementById('sc').textContent=correct;document.getElementById('sw').textContent=wrong;document.getElementById('ss').textContent=streak;document.getElementById('st').textContent=total;}
+function speak(t){if(!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(t.replace(/\|/g,''));u.lang='de-DE';u.rate=.85;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}
+function confetti(n=16){const cs=['#f9a8d4','#93c5fd','#6ee7b7','#c4b5fd','#fdba74','#fde68a'];for(let i=0;i<n;i++){const e=document.createElement('div');e.className='cp';e.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*40-10}vh;background:${cs[Math.floor(Math.random()*cs.length)]};animation-duration:${.8+Math.random()*.8}s;animation-delay:${Math.random()*.3}s;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;`;document.body.appendChild(e);setTimeout(()=>e.remove(),1600);}}
+
+function renderGame(){
+  if(!deck.length){deck=shuffle(getFiltered());idx=0;}
+  const ga=document.getElementById('ga');
+  if(mode==='fc') renderFC(ga);
+  else if(mode==='mc') renderMC(ga);
+  else renderTI(ga);
+  updStats();
+}
+
+function pbHtml(){
+  const cur=(idx%deck.length)+1,tot=deck.length,pct=Math.round(cur/tot*100);
+  return `<div id="pb-wrap"><div id="pb-bg"><div id="pb-fill" style="width:${pct}%"></div></div><div id="pb-lbl">${cur}/${tot}</div></div>`;
+}
+
+// FLASHCARD
+function renderFC(ga){
+  const v=deck[idx%deck.length],s=TS[v[4]]||TS.gm;
+  ga.innerHTML=`${pbHtml()}
+    <div class="cs" id="cs" onclick="flipCard()">
+      <div class="ci" id="ci">
+        <div class="cf cf-front">
+          <div class="c-sect">${v[2]} ${v[3]} · Day ${v[5]}</div>
+          <span class="tbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">${s.label}</span>
+          <div class="c-de">${v[0].replace('|','<span style="color:#a78bfa">|</span>')}</div>
+          <div class="c-hint">👆 Tap to reveal</div>
+        </div>
+        <div class="cf cf-back">
+          <div class="c-sect">${v[2]} ${v[3]}</div>
+          <span class="tbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd}">${s.label}</span>
+          <div class="c-de" style="color:${s.bd}">${v[0]}</div>
+          <div class="c-en">${v[1]}</div>
+        </div>
+      </div>
+    </div>
+    <button id="spk" onclick="speak('${v[0].replace(/'/g,"\\'")}')">🔊 Aussprechen</button>
+    <div class="card-nav">
+      <button class="nb nb-p" onclick="navFC(-1)">← Zurück</button>
+      <span id="cc">${correct}✅ ${wrong}❌</span>
+      <button class="nb nb-n" onclick="navFC(1)">Weiter →</button>
+    </div>`;
+}
+function flipCard(){document.getElementById('cs').classList.toggle('flipped');speak(deck[idx%deck.length][0]);}
+function navFC(d){idx=(idx+d+deck.length)%deck.length;renderFC(document.getElementById('ga'));}
+
+// MC
+function renderMC(ga){
+  const v=deck[idx%deck.length],s=TS[v[4]]||TS.gm;
+  const w3=shuffle(V.filter(x=>x[1]!==v[1])).slice(0,3).map(x=>x[1]);
+  const opts=shuffle([v[1],...w3]);
+  ga.innerHTML=`${pbHtml()}
+    <div class="mc-q">
+      <div class="mc-s">${v[2]} ${v[3]} · ${s.label}</div>
+      <div class="mc-w" style="color:${s.bd}">${v[0]}</div>
+    </div>
+    <div class="mc-opts">${opts.map(o=>`<button class="mo" onclick="checkMC(this,'${o.replace(/'/g,"\\'")}','${v[1].replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+    <div id="fb"></div>`;
+}
+function checkMC(btn,chosen,correct_en){
+  document.querySelectorAll('.mo').forEach(b=>{b.disabled=true;if(b.textContent.trim()===correct_en)b.classList.add('ok');});
+  const fb=document.getElementById('fb');fb.style.display='block';
+  if(chosen===correct_en){btn.classList.add('ok');fb.className='ok';fb.textContent='✅ Richtig! Sehr gut!';correct++;streak++;total++;confetti(14);
+    setTimeout(()=>{idx=(idx+1)%deck.length;renderMC(document.getElementById('ga'));updStats();},1300);
+  }else{btn.classList.add('bad');fb.className='bad';fb.textContent=`❌ Falsch. Richtig: ${correct_en}`;wrong++;streak=0;total++;
+    setTimeout(()=>{idx=(idx+1)%deck.length;renderMC(document.getElementById('ga'));updStats();},1900);}
+  if(total>0&&(idx+1)%deck.length===0)setTimeout(showSummary,2400);
+}
+
+// TYPE-IN
+function renderTI(ga){
+  const v=deck[idx%deck.length],s=TS[v[4]]||TS.gm;
+  ga.innerHTML=`${pbHtml()}
+    <div class="tp">
+      <span class="tbadge" style="background:${s.bg};color:${s.tx};border:1px solid ${s.bd};margin-bottom:12px;display:inline-block">${s.label}</span>
+      <div class="t-en">${v[1]}</div>
+      <div class="t-note">${v[2]} ${v[3]}</div>
+    </div>
+    <input type="text" id="ti" placeholder="Auf Deutsch…" autocomplete="off" onkeydown="if(event.key==='Enter')checkTI()" oninput="this.className=''">
+    <button id="ts" onclick="checkTI()">Prüfen ✓</button>
+    <div id="fb"></div>
+    <div id="rv">Nicht sicher? <span onclick="revealAns('${v[0].replace(/'/g,"\\'")}')">Antwort zeigen</span></div>`;
+  document.getElementById('ti').focus();
+}
+function norm(s){return s.trim().toLowerCase().replace(/\|/g,'').replace(/\(sich\)\s*/gi,'').replace(/\s+/g,' ').replace(/,.*$/,'');}
+function checkTI(){
+  const inp=document.getElementById('ti'),v=deck[idx%deck.length];
+  const fb=document.getElementById('fb');fb.style.display='block';
+  if(norm(inp.value)===norm(v[0])){inp.className='ok';fb.className='ok';fb.textContent='✅ Richtig! Perfekt!';correct++;streak++;total++;confetti(20);speak(v[0]);
+    setTimeout(()=>{idx=(idx+1)%deck.length;renderTI(document.getElementById('ga'));updStats();},1400);
+  }else{inp.className='bad';fb.className='bad';fb.textContent=`❌ Fast! Richtig: ${v[0]}`;wrong++;streak=0;total++;
+    setTimeout(()=>{idx=(idx+1)%deck.length;renderTI(document.getElementById('ga'));updStats();},2000);}
+  if(total>0&&(idx+1)%deck.length===0)setTimeout(showSummary,2500);
+}
+function revealAns(de){const fb=document.getElementById('fb');fb.style.display='block';fb.className='bad';fb.textContent=`📖 Antwort: ${de}`;speak(de);}
+
+function showSummary(){
+  const pct=total>0?Math.round(correct/total*100):0;
+  document.getElementById('m-title').textContent=pct>=85?'🏆 Ausgezeichnet!':pct>=70?'🎉 Gut gemacht!':'💪 Weiter üben!';
+  document.getElementById('m-score').textContent=`${pct}%`;
+  document.getElementById('m-msg').textContent=`${correct} von ${total} richtig · Streak: ${streak} 🔥`;
+  document.getElementById('mov').classList.add('show');
+  if(pct>=80)confetti(40);
+}
+function closeModal(){document.getElementById('mov').classList.remove('show');idx=0;deck=shuffle(getFiltered());renderGame();}
+
+function showPage(p){
+  document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+  document.getElementById('pg-'+p).classList.add('active');
+  document.querySelectorAll('.nt').forEach((b,i)=>b.classList.toggle('active',['plan','game'][i]===p));
+  if(p==='game'){deck=shuffle(getFiltered());renderGame();}
+}
+
+buildPlan();
+deck=shuffle(V);
+</script>
+</body>
+</html>
