@@ -1,12 +1,29 @@
-# 🇩🇪 German Learning Game
+# 🇩🇪 German A1 Interactive Learning App
 
-Interactive A1 German vocabulary trainer.
+An interactive German A1 vocabulary trainer with flashcards, quizzes, and typing practice.
 
-🎮 Features:
-- Gender quiz (der/die/das)
-- Plural practice
-- 177+ words
-- Visual learning UI
+## 🚀 Live App
+👉 https://devasam188.github.io/GermanA1/
 
-👉 Play Live:
-https://your-username.github.io/repo-name/german_learning_game.html
+## 🎮 Features
+- 📅 6-Day Study Plan
+- 🃏 Flashcards (220+ words)
+- 🎯 Multiple Choice Quiz
+- ✏️ Type-in Practice
+- 📊 Progress Tracking
+- 📱 Mobile-friendly UI
+
+## 🧠 Topics Covered
+- Kapitel 1–4 (Netzwerk Neu A1)
+- Greetings, Numbers, Countries
+- Hobbies, Professions
+- City & Transport
+- Food & Shopping
+
+## 🛠️ Tech
+- HTML, CSS, JavaScript
+- Hosted via GitHub Pages
+
+---
+
+💡 Open on your phone for best experience.
